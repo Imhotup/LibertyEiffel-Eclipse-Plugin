@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Eclipse
+Bundle-SymbolicName: org.libertyeiffel.eclipse
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.libertyeiffel.eclipse.Activator
+Bundle-Vendor: liberty-eiffel.org
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
