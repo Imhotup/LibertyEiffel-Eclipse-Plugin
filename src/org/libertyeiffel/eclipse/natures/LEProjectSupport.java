@@ -1,0 +1,88 @@
+package org.libertyeiffel.eclipse.natures;
+
+import java.net.URI;
+
+import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectDescription;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IProgressMonitor;
+
+public class LEProjectSupport {
+	
+	public static IProject createProject(String projectName, URI location) {
+		Assert.isNotNull(projectName);
+		Assert.isTrue(projectName.trim().length() > 0);
+		
+		IProject project = createBaseProject(projectName, location);
+		
+		try {
+			addNature(project);
+			String[] paths = { "bin", "src" };
+			addToProjectStructure(project, paths);
+		} catch (CoreException e) {
+			e.printStackTrace();
+			project = null;
+		}
+		
+		return project;
+	}
+	
+	private static IProject createBaseProject(String projectName, URI location) {
+		IProject newProject = ResourcesPlugin.getWorkspace().getRoot().getProject(projectName);
+		
+		if (!newProject.exists()) {
+			URI projectLocation = location;
+			IProjectDescription description = newProject.getWorkspace().newProjectDescription(newProject.getName());
+			if (location != null && ResourcesPlugin.getWorkspace().getRoot().getLocationURI().equals(location)) {
+				projectLocation = null;
+			}
+			
+			description.setLocationURI(projectLocation);
+			try {
+				newProject.create(description, null);
+				if (!newProject.isOpen()) {
+					newProject.open(null);
+				}
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return newProject;
+	}
+	
+	private static void createFolder(IFolder folder) throws CoreException {
+		IContainer parent = folder.getParent();
+		if (parent instanceof IFolder) {
+			createFolder((IFolder) parent);
+		}
+		if (!folder.exists()) {
+			folder.create(false, true, null);
+		}
+	}
+	
+	private static void addToProjectStructure(IProject newProject, String[] paths) throws CoreException {
+		for (String path : paths) {
+			IFolder etcFolders = newProject.getFolder(path);
+			createFolder(etcFolders);
+		}
+	}
+	
+	private static void addNature(IProject project) throws CoreException {
+		if (!project.hasNature(ProjectNature.NATURE_ID)) {
+			IProjectDescription description = project.getDescription();
+			String[] prevNature = description.getNatureIds();
+			String[] newNatures = new String[prevNature.length + 1];
+			System.arraycopy(prevNature, 0, newNatures, 0, prevNature.length);
+			newNatures[prevNature.length] = ProjectNature.NATURE_ID;
+			description.setNatureIds(newNatures);
+			
+			IProgressMonitor monitor = null;
+			project.setDescription(description, monitor);
+		}
+	}
+}
