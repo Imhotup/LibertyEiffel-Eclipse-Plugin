@@ -15,6 +15,14 @@
             id="org.libertyeiffel.eclipse.wizard.new"
             name="%wizard.name">
       </wizard>
+      <wizard
+            category="org.libertyeiffel.eclipse.category.wizards"
+            class="org.libertyeiffel.eclipse.wizards.NewEiffelClassFile"
+            descriptionImage="icons/sample.gif"
+            icon="icons/sample.gif"
+            id="org.libertyeiffel.eclipse.file.class"
+            name="%wizard.name.0">
+      </wizard>
    </extension>
    <extension
          point="org.eclipse.ui.views">
@@ -93,7 +101,7 @@
             contentProvider="org.libertyeiffel.eclipse.navigator.LEContentProvider"
             id="org.libertyeiffel.eclipse.navigatorContent"
             labelProvider="org.libertyeiffel.eclipse.navigator.LELabelProvider"
-            name="Liberty Eiffel Navigator Content">
+            name="%navigatorContent.name">
          <triggerPoints>
             <or>
                <instanceof
@@ -113,6 +121,24 @@
             </parentExpression>
          </commonSorter>
       </navigatorContent>
+   </extension>
+   <extension
+         id="org.libertyeiffel.eclipse.contentype"
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="e"
+            id="org.libertyeiffel.eclipse.contenttype.src"
+            name="%content-type.name"
+            priority="normal">
+         <describer
+               class="org.eclipse.core.internal.content.TextContentDescriber">
+            <parameter
+                  name="element"
+                  value="Eiffel class">
+            </parameter>
+         </describer>
+      </content-type>
    </extension>
 
 </plugin>
