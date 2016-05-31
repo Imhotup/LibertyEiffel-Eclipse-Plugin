@@ -28,7 +28,7 @@
          point="org.eclipse.ui.views">
       <view
             category="org.libertyeiffel.eclipse.category"
-            class="org.libertyeiffel.eclipse.navigator.LENavigator"
+            class="org.eclipse.ui.navigator.CommonNavigator"
             icon="icons/sample.gif"
             id="org.libertyeiffel.eclipse.navigator"
             name="%view.name">
@@ -105,7 +105,7 @@
          <triggerPoints>
             <or>
                <instanceof
-                     value="org.libertyeiffel.eclipse.navigator.LEProjectWorkbenchRoot">
+                     value="org.eclipse.core.resources.IWorkspaceRoot">
                </instanceof>
             </or>
          </triggerPoints>

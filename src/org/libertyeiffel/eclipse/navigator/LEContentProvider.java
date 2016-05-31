@@ -1,32 +1,40 @@
 package org.libertyeiffel.eclipse.navigator;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Vector;
+import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.TreePath;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.libertyeiffel.eclipse.natures.ProjectNature;
 
-public class LEContentProvider implements ITreeContentProvider {
+public class LEContentProvider implements ITreeContentProvider, IResourceChangeListener {
+	private Map<String, Object> wrapperCache = new HashMap<String, Object>();
 	
 	private static final Object[] NO_CHILDREN = {};
-	private LEProjectParent[] customProjectParents;
+	private Viewer viewer;
+	
+	public LEContentProvider() {
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.POST_CHANGE);
+	}
 	
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		System.out.println("ContentProvider.dispose");
-		
+		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 	}
 
 	@Override
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		// TODO Auto-generated method stub
-		System.out.println("ContentProvider.inputChanged: old: " + 
-				oldInput.getClass().getName() + " new: " + newInput.getClass().getName());
+	public void inputChanged(Viewer iViewer, Object oldInput, Object newInput) {
+		viewer = iViewer;
 		
 	}
 
@@ -37,11 +45,13 @@ public class LEContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object getParent(Object element) {
-		System.out.println("ContentProvider.getParent: " + element.getClass().getName());
 		Object parent = null;
-		if (ILEProjectElement.class.isInstance(element)) {
+		
+		if (IProject.class.isInstance(element)) {
+			parent = ((IProject)element).getWorkspace().getRoot();
+		} else if (ILEProjectElement.class.isInstance(element)) {
 			parent = ((ILEProjectElement)element).getParent();
-		}
+		} //else parent = null if IWorkspaceRoot or anything else
 		
 		return parent;
 	}
@@ -50,8 +60,8 @@ public class LEContentProvider implements ITreeContentProvider {
 	public boolean hasChildren(Object element) {
 		boolean hasChildren = false;
 		
-		if (LEProjectWorkbenchRoot.class.isInstance(element)) {
-			hasChildren = customProjectParents.length > 0;
+		if (IWorkspaceRoot.class.isInstance(element)) {
+			hasChildren = ((IWorkspaceRoot)element).getProjects().length > 0;
 		} else if (ILEProjectElement.class.isInstance(element)) {
 			hasChildren = ((ILEProjectElement)element).hasChildren();
 		}
@@ -61,12 +71,10 @@ public class LEContentProvider implements ITreeContentProvider {
 	@Override
 	public Object[] getChildren(Object parentElement) {
 		Object[] children = null;
-		if (LEProjectWorkbenchRoot.class.isInstance(parentElement)) {
-			if (customProjectParents == null) {
-				customProjectParents = initializeParent(parentElement);
-			}
+		if (IWorkspaceRoot.class.isInstance(parentElement)) {
+			IProject[] projects = ((IWorkspaceRoot)parentElement).getProjects();
+			children = createCustomProjectParents(projects);
 			
-			children = customProjectParents;
 		} else if (ILEProjectElement.class.isInstance(parentElement)) {
 			children = ((ILEProjectElement) parentElement).getChildren();
 		} else {
@@ -75,27 +83,51 @@ public class LEContentProvider implements ITreeContentProvider {
 		
 		return children;
 	}
-
-	private LEProjectParent[] initializeParent(Object parentElement) {
-		IProject [] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+	
+	@Override
+	public void resourceChanged(IResourceChangeEvent event) {
+		TreeViewer treeViewer = (TreeViewer) viewer;
 		
-		List<LEProjectParent> list = new Vector<LEProjectParent>();
-		for (int i = 0; i < projects.length; i++) {
-			try {
-				if (projects[i].getNature(ProjectNature.NATURE_ID) != null) {
-					list.add(new LEProjectParent(projects[i]));
-				}
-			} catch (CoreException e) {
-				// TODO: handle exception
+		TreePath[] treePaths = treeViewer.getExpandedTreePaths();
+		treeViewer.refresh();
+		treeViewer.setExpandedTreePaths(treePaths);
+		
+	}
+	
+	private Object createCustomProjectParent(IProject parentElemet) {
+		Object result = null;
+		try {
+			if (parentElemet.getNature(ProjectNature.NATURE_ID)!= null) {
+				result = new LEProjectParent(parentElemet);
 			}
+		} catch (CoreException e) {
+			// Go to the next IProject
 		}
 		
-		LEProjectParent[] result = new LEProjectParent[list.size()];
+		return result;
+	}
+	
+	private Object[] createCustomProjectParents(IProject[] projects) {
+		Object[] result = null;
+		
+		List<Object> list = new ArrayList<>();
+		for (int i = 0; i < projects.length; i++) {
+			Object customProjectParent = wrapperCache.get(projects[i].getName());
+			if (customProjectParent == null) {
+				customProjectParent = createCustomProjectParent(projects[i]);
+				if (customProjectParent != null) {
+					wrapperCache.put(projects[i].getName(), customProjectParent);
+				}
+			}
+			
+			if (customProjectParent != null) {
+				list.add(customProjectParent);
+			} //else ignore the project
+		}
+		
+		result = new Object[list.size()];
 		list.toArray(result);
 		
 		return result;
 	}
-
-	
-
 }

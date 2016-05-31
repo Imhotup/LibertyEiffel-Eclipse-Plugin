@@ -16,7 +16,9 @@ Bundle-ActivationPolicy: lazy
 Import-Package: org.junit;version="4.12.0"
 Bundle-ClassPath: .,
  lib/dom4j-1.6.1.jar,
- lib/jaxen-1.1-beta-6.jar
+ lib/jaxen-1.1-beta-6.jar,
+ lib/easymock-3.4.jar
 Export-Package: org.libertyeiffel.eclipse.natures,
+ org.libertyeiffel.eclipse.navigator,
  org.libertyeiffel.eclipse.perspectives,
  org.libertyeiffel.eclipse.wizards
