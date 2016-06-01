@@ -40,14 +40,6 @@
    </extension>
    <extension
          point="org.eclipse.ui.navigator.viewer">
-      <viewerActionBinding
-            viewerId="org.libertyeiffel.eclipse.navigator">
-         <includes>
-            <actionExtension
-                  pattern="org.eclipse.ui.navigator.resources.*">
-            </actionExtension>
-         </includes>
-      </viewerActionBinding>
       <viewerContentBinding
             viewerId="org.libertyeiffel.eclipse.navigator">
          <includes>
@@ -56,6 +48,31 @@
             </contentExtension>
          </includes>
       </viewerContentBinding>
+      <viewer
+            viewerId="org.libertyeiffel.eclipse.navigator">
+         <popupMenu
+               id="org.libertyeiffel.eclipse.navigator#PopupMenu">
+            <insertionPoint
+                  name="group.new"
+                  separator="true">
+            </insertionPoint>
+            <insertionPoint
+                  name="group.build"
+                  separator="true">
+            </insertionPoint>
+         </popupMenu>
+      </viewer>
+      <viewerActionBinding
+            viewerId="org.libertyeiffel.eclipse.navigator">
+         <includes>
+            <actionExtension
+                  pattern="org.libertyeiffel.eclipse.popup.actionprovider.CustomNewAction">
+            </actionExtension>
+            <actionExtension
+                  pattern="org.libertyeiffel.eclipse.popup.actionprovider.CustomRefreshAction">
+            </actionExtension>
+         </includes>
+      </viewerActionBinding>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
@@ -127,11 +144,34 @@
             </parentExpression>
          </commonSorter>
       </navigatorContent>
-      <commonWizard
-            type="new"
-            wizardId="org.libertyeiffel.eclipse.file.class">
-         <enablement></enablement>
-      </commonWizard>
+      <actionProvider
+            class="org.libertyeiffel.eclipse.popup.actionprovider.NewActionProvider"
+            id="org.libertyeiffel.eclipse.popup.actionprovider.CustomNewAction">
+         <enablement>
+            <or>
+               <instanceof
+                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
+               </instanceof>
+               <instanceof
+                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
+               </instanceof>
+            </or>
+         </enablement>
+      </actionProvider>
+      <actionProvider
+            class="org.libertyeiffel.eclipse.popup.actionprovider.RefreshActionProvider"
+            id="org.libertyeiffel.eclipse.popup.actionprovider.CustomRefreshAction">
+         <enablement>
+            <or>
+               <instanceof
+                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
+               </instanceof>
+               <instanceof
+                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
+               </instanceof>
+            </or>
+         </enablement>
+      </actionProvider>
       <commonWizard
             type="new"
             wizardId="org.libertyeiffel.eclipse.wizard.new">
@@ -157,30 +197,55 @@
       </content-type>
    </extension>
    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Open the New Eiffel Class Wizard"
+            id="org.libertyeiffel.eclipse.file.class"
+            name="Eiffel Class">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.libertyeiffel.eclipse.navigator.handler.BogusHandler"
+            commandId="org.libertyeiffel.eclipse.file.class">
+         <enabledWhen>
+            <with
+                  variable="selection">
+               <iterate>
+                  <or>
+                     <instanceof
+                           value="org.libertyeiffel.eclipse.navigator.LEProjectParent">
+                     </instanceof>
+                     <instanceof
+                           value="org.libertyeiffel.eclipse.navigator.LEProjectSrc">
+                     </instanceof>
+                  </or>
+               </iterate>
+            </with>
+         </enabledWhen>
+      </handler>
+   </extension>
+   <extension
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="popup:org.libertyeiffel.eclipse.navigator?before=import">
+            locationURI="popup:common.new.menu?after=additions">
          <command
-               commandId="org.eclipse.ui.edit.copy"
-               label="%command.label"
+               commandId="org.libertyeiffel.eclipse.file.class"
                style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
          </command>
-         <command
-               commandId="org.eclipse.ui.edit.paste"
-               label="%command.label.0"
-               style="push">
-         </command>
-         <command
-               commandId="org.eclipse.ui.edit.delete"
-               label="%command.label.1"
-               style="push">
-         </command>
-         <separator
-               name="org.libertyeiffel.eclipse.separator"
-               visible="true">
-         </separator>
       </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commandImages">
+      <image
+            commandId="org.libertyeiffel.eclipse.file.class"
+            icon="icons/sample.gif">
+      </image>
    </extension>
 
 </plugin>

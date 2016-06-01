@@ -40,13 +40,6 @@ public class Activator extends AbstractUIPlugin {
 		super.stop(context);
 	}
 	
-	public static Image getImage(String imagePath) {
-		ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, imagePath);
-		Image image = imageDescriptor.createImage();
-		
-		return image;
-	}
-
 	/**
 	 * Returns the shared instance
 	 *
@@ -54,6 +47,13 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static Activator getDefault() {
 		return plugin;
+	}
+	
+	public static Image getImage(String imagePath) {
+		ImageDescriptor imageDescriptor = AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, imagePath);
+		Image image = imageDescriptor.createImage();
+		
+		return image;
 	}
 
 	/**
@@ -65,5 +65,9 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+
+	public static ImageDescriptor getIDEImageDescriptor(String imagePath) {
+		return AbstractUIPlugin.imageDescriptorFromPlugin(Activator.PLUGIN_ID, imagePath);
 	}
 }
