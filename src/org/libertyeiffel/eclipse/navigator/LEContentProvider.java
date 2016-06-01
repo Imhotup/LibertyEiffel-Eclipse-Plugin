@@ -94,11 +94,11 @@ public class LEContentProvider implements ITreeContentProvider, IResourceChangeL
 		
 	}
 	
-	private Object createCustomProjectParent(IProject parentElemet) {
+	private Object createCustomProjectParent(IProject parentElement) {
 		Object result = null;
 		try {
-			if (parentElemet.getNature(ProjectNature.NATURE_ID)!= null) {
-				result = new LEProjectParent(parentElemet);
+			if (parentElement.getNature(ProjectNature.NATURE_ID) != null) {
+				result = new LEProjectParent(parentElement);
 			}
 		} catch (CoreException e) {
 			// Go to the next IProject
@@ -110,7 +110,7 @@ public class LEContentProvider implements ITreeContentProvider, IResourceChangeL
 	private Object[] createCustomProjectParents(IProject[] projects) {
 		Object[] result = null;
 		
-		List<Object> list = new ArrayList<>();
+		List<Object> list = new ArrayList<Object>();
 		for (int i = 0; i < projects.length; i++) {
 			Object customProjectParent = wrapperCache.get(projects[i].getName());
 			if (customProjectParent == null) {

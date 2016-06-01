@@ -82,7 +82,7 @@ public class ContentProviderTest {
 	public void testGetChildrenForIWorkspaceRootWithNoProjects() {
 		IProject [] projects = {};
 		IWorkspaceRoot workspaceRoot = EasyMock.createStrictMock(IWorkspaceRoot.class);
-		workspaceRoot.getProject();
+		workspaceRoot.getProjects();
 		EasyMock.expectLastCall().andReturn(projects);
 		
 		EasyMock.replay(workspaceRoot);
@@ -102,7 +102,7 @@ public class ContentProviderTest {
 		projects[0] = project;
 		
 		IWorkspaceRoot workspaceRoot = EasyMock.createStrictMock(IWorkspaceRoot.class);
-		workspaceRoot.getProject();
+		workspaceRoot.getProjects();
 		EasyMock.expectLastCall().andReturn(projects);
 		
 		project.getName();
@@ -131,12 +131,15 @@ public class ContentProviderTest {
 		workspaceRoot.getProjects();
 		EasyMock.expectLastCall().andReturn(projects);
 		
-		String projectName = "Liberty Eiffel Project";
+		String projectName = "custom project";
 		project.getName();
 		EasyMock.expectLastCall().andReturn(projectName);
 		
 		project.getNature(PROJECT_NATURE);
 		EasyMock.expectLastCall().andReturn(EasyMock.createMock(IProjectNature.class));
+		
+		project.getName();
+		EasyMock.expectLastCall().andReturn(projectName);
 		
 		project.getName();
 		EasyMock.expectLastCall().andReturn(projectName);
@@ -164,7 +167,7 @@ public class ContentProviderTest {
 		};
 		
 		IWorkspaceRoot workspaceRoot = EasyMock.createStrictMock(IWorkspaceRoot.class);
-		workspaceRoot.getProject();
+		workspaceRoot.getProjects();
 		EasyMock.expectLastCall().andReturn(projects);
 		
 		String bogusProjectName = "bogus project";
@@ -243,7 +246,7 @@ public class ContentProviderTest {
 		 customProject2.getName();
 		 EasyMock.expectLastCall().andReturn(customProjectName2);
 	         
-		 EasyMock.replay(workspaceRoot, customProject1, nonCustomProject, customProject2);
+		 EasyMock.replay(workspaceRoot, nonCustomProject, customProject1, customProject2);
 	         
 		 Object [] actual = contentProvider.getChildren(workspaceRoot);
 		 Assert.assertNotNull(actual);
