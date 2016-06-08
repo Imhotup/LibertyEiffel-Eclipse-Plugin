@@ -21,7 +21,7 @@ public class LEProjectSupport {
 		
 		try {
 			addNature(project);
-			String[] paths = { "bin", "src" };
+			String[] paths = {"src"};
 			addToProjectStructure(project, paths);
 		} catch (CoreException e) {
 			e.printStackTrace();

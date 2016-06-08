@@ -25,56 +25,6 @@
       </wizard>
    </extension>
    <extension
-         point="org.eclipse.ui.views">
-      <view
-            category="org.libertyeiffel.eclipse.category"
-            class="org.eclipse.ui.navigator.CommonNavigator"
-            icon="icons/sample.gif"
-            id="org.libertyeiffel.eclipse.navigator"
-            name="%view.name">
-      </view>
-      <category
-            id="org.libertyeiffel.eclipse.category"
-            name="%category.name.0">
-      </category>
-   </extension>
-   <extension
-         point="org.eclipse.ui.navigator.viewer">
-      <viewerContentBinding
-            viewerId="org.libertyeiffel.eclipse.navigator">
-         <includes>
-            <contentExtension
-                  pattern="org.libertyeiffel.eclipse.navigatorContent">
-            </contentExtension>
-         </includes>
-      </viewerContentBinding>
-      <viewer
-            viewerId="org.libertyeiffel.eclipse.navigator">
-         <popupMenu
-               id="org.libertyeiffel.eclipse.navigator#PopupMenu">
-            <insertionPoint
-                  name="group.new"
-                  separator="true">
-            </insertionPoint>
-            <insertionPoint
-                  name="group.build"
-                  separator="true">
-            </insertionPoint>
-         </popupMenu>
-      </viewer>
-      <viewerActionBinding
-            viewerId="org.libertyeiffel.eclipse.navigator">
-         <includes>
-            <actionExtension
-                  pattern="org.libertyeiffel.eclipse.popup.actionprovider.CustomNewAction">
-            </actionExtension>
-            <actionExtension
-                  pattern="org.libertyeiffel.eclipse.popup.actionprovider.CustomRefreshAction">
-            </actionExtension>
-         </includes>
-      </viewerActionBinding>
-   </extension>
-   <extension
          point="org.eclipse.ui.perspectives">
       <perspective
             class="org.libertyeiffel.eclipse.perspectives.Perspective"
@@ -85,7 +35,13 @@
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
-            targetID="*">
+            targetID="org.libertyeiffel.eclipse.perspective">
+         <newWizardShortcut
+               id="org.libertyeiffel.eclipse.wizard.new">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.libertyeiffel.eclipse.file.class">
+         </newWizardShortcut>
          <view
                id="org.libertyeiffel.eclipse.navigator"
                minimized="false"
@@ -93,12 +49,6 @@
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
-         <newWizardShortcut
-               id="org.libertyeiffel.eclipse.wizard.new">
-         </newWizardShortcut>
-         <newWizardShortcut
-               id="org.libertyeiffel.eclipse.file.class">
-         </newWizardShortcut>
       </perspectiveExtension>
    </extension>
    <extension
@@ -119,112 +69,12 @@
       </image>
    </extension>
    <extension
-         point="org.eclipse.ui.navigator.navigatorContent">
-      <navigatorContent
-            contentProvider="org.libertyeiffel.eclipse.navigator.LEContentProvider"
-            id="org.libertyeiffel.eclipse.navigatorContent"
-            labelProvider="org.libertyeiffel.eclipse.navigator.LELabelProvider"
-            name="%navigatorContent.name">
-         <triggerPoints>
-            <or>
-               <instanceof
-                     value="org.eclipse.core.resources.IWorkspaceRoot">
-               </instanceof>
-            </or>
-         </triggerPoints>
-         <commonSorter
-               class="org.libertyeiffel.eclipse.sorter.CategorySorter"
-               id="org.libertyeiffel.eclipse.sorter.schemacategorysorter">
-            <parentExpression>
-               <or>
-                  <instanceof
-                        value="org.libertyeiffel.eclipse.navigator.LEProjectParent">
-                  </instanceof>
-               </or>
-            </parentExpression>
-         </commonSorter>
-      </navigatorContent>
-      <actionProvider
-            class="org.libertyeiffel.eclipse.popup.actionprovider.NewActionProvider"
-            id="org.libertyeiffel.eclipse.popup.actionprovider.CustomNewAction">
-         <enablement>
-            <or>
-               <instanceof
-                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
-               </instanceof>
-               <instanceof
-                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
-               </instanceof>
-            </or>
-         </enablement>
-      </actionProvider>
-      <actionProvider
-            class="org.libertyeiffel.eclipse.popup.actionprovider.RefreshActionProvider"
-            id="org.libertyeiffel.eclipse.popup.actionprovider.CustomRefreshAction">
-         <enablement>
-            <or>
-               <instanceof
-                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
-               </instanceof>
-               <instanceof
-                     value="org.libertyeiffel.eclipse.navigator.ILEProjectElement">
-               </instanceof>
-            </or>
-         </enablement>
-      </actionProvider>
-      <commonWizard
-            type="new"
-            wizardId="org.libertyeiffel.eclipse.wizard.new">
-         <enablement></enablement>
-      </commonWizard>
-   </extension>
-   <extension
-         id="org.libertyeiffel.eclipse.contentype"
-         point="org.eclipse.core.contenttype.contentTypes">
-      <content-type
-            base-type="org.eclipse.core.runtime.text"
-            file-extensions="e"
-            id="org.libertyeiffel.eclipse.contenttype.src"
-            name="%content-type.name"
-            priority="normal">
-         <describer
-               class="org.eclipse.core.internal.content.TextContentDescriber">
-            <parameter
-                  name="element"
-                  value="Eiffel class">
-            </parameter>
-         </describer>
-      </content-type>
-   </extension>
-   <extension
          point="org.eclipse.ui.commands">
       <command
-            description="Open the New Eiffel Class Wizard"
+            description="%command.description"
             id="org.libertyeiffel.eclipse.file.class"
-            name="Eiffel Class">
+            name="%command.name">
       </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="org.libertyeiffel.eclipse.navigator.handler.BogusHandler"
-            commandId="org.libertyeiffel.eclipse.file.class">
-         <enabledWhen>
-            <with
-                  variable="selection">
-               <iterate>
-                  <or>
-                     <instanceof
-                           value="org.libertyeiffel.eclipse.navigator.LEProjectParent">
-                     </instanceof>
-                     <instanceof
-                           value="org.libertyeiffel.eclipse.navigator.LEProjectSrc">
-                     </instanceof>
-                  </or>
-               </iterate>
-            </with>
-         </enabledWhen>
-      </handler>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -246,6 +96,89 @@
             commandId="org.libertyeiffel.eclipse.file.class"
             icon="icons/sample.gif">
       </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="org.libertyeiffel.eclipse.category"
+            class="org.eclipse.ui.navigator.CommonNavigator"
+            icon="icons/sample.gif"
+            id="org.libertyeiffel.eclipse.navigator"
+            name="%view.name.0">
+      </view>
+      <category
+            id="org.libertyeiffel.eclipse.category"
+            name="%category.name.1">
+      </category>
+      <view
+            category="org.libertyeiffel.eclipse.category"
+            class="org.libertyeiffel.eclipse.editors.TaskOverview"
+            id="org.libertyeiffel.eclipse.taskoverview"
+            name="Task Overview"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerActionBinding
+            viewerId="org.libertyeiffel.eclipse.navigator">
+         <includes>
+            <actionExtension
+                  pattern="org.eclipse.ui.navigator.resources.*">
+            </actionExtension>
+         </includes>
+      </viewerActionBinding>
+      <viewerContentBinding
+            viewerId="org.libertyeiffel.eclipse.navigator">
+         <includes>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resourceContent">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.filters.*">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.linkHelper">
+            </contentExtension>
+            <contentExtension
+                  pattern="org.eclipse.ui.navigator.resources.workingSets">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            file-extensions="e"
+            id="org.libertyeiffel.eclipse.contentType"
+            name="Eiffel Class"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.libertyeiffel.eclipse.editors.EiffelEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="false"
+            extensions="e"
+            id="org.libertyeiffel.eclipse.eiffeleditor"
+            name="Eiffel Editor">
+      </editor>
+      <editor
+            class="org.libertyeiffel.eclipse.editors.TaskEditor"
+            default="false"
+            id="org.libertyeiffel.eclipse.editor.task"
+            name="Task Editor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.libertyeiffel.eclipse.handler.CallEditor"
+            id="org.libertyeiffel.eclipse.openEditor"
+            name="Open Task Editor">
+      </command>
    </extension>
 
 </plugin>
