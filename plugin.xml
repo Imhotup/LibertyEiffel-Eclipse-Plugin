@@ -75,6 +75,21 @@
             id="org.libertyeiffel.eclipse.file.class"
             name="%command.name">
       </command>
+      <command
+            defaultHandler="org.libertyeiffel.eclipse.handler.CallEditor"
+            id="org.libertyeiffel.eclipse.openEditor"
+            name="%command.name.0">
+      </command>
+      <command
+            defaultHandler="org.libertyeiffel.eclipse.editors.AddBuilder"
+            id="org.libertyeiffel.eclipse.addBuilder"
+            name="Add Eiffel Builder">
+      </command>
+      <command
+            defaultHandler="org.libertyeiffel.eclipse.editors.RemoveBuilder"
+            id="org.libertyeiffel.eclipse.removeBuilder"
+            name="Remove Eiffel Builder">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.menus">
@@ -87,6 +102,21 @@
             <visibleWhen
                   checkEnabled="true">
             </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+         <command
+               commandId="org.libertyeiffel.eclipse.addBuilder"
+               style="push">
+            <visibleWhen
+                  checkEnabled="true">
+            </visibleWhen>
+         </command>
+         <command
+               commandId="org.libertyeiffel.eclipse.removeBuilder"
+               style="push">
          </command>
       </menuContribution>
    </extension>
@@ -102,7 +132,6 @@
       <view
             category="org.libertyeiffel.eclipse.category"
             class="org.eclipse.ui.navigator.CommonNavigator"
-            icon="icons/sample.gif"
             id="org.libertyeiffel.eclipse.navigator"
             name="%view.name.0">
       </view>
@@ -114,7 +143,7 @@
             category="org.libertyeiffel.eclipse.category"
             class="org.libertyeiffel.eclipse.editors.TaskOverview"
             id="org.libertyeiffel.eclipse.taskoverview"
-            name="Task Overview"
+            name="%view.name.1"
             restorable="true">
       </view>
    </extension>
@@ -151,7 +180,7 @@
       <content-type
             file-extensions="e"
             id="org.libertyeiffel.eclipse.contentType"
-            name="Eiffel Class"
+            name="%content-type.name.0"
             priority="normal">
       </content-type>
    </extension>
@@ -160,25 +189,38 @@
       <editor
             class="org.libertyeiffel.eclipse.editors.EiffelEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-            default="false"
+            default="true"
             extensions="e"
             id="org.libertyeiffel.eclipse.eiffeleditor"
-            name="Eiffel Editor">
+            name="%editor.name">
+         <contentTypeBinding
+               contentTypeId="org.libertyeiffel.eclipse.contentType">
+         </contentTypeBinding>
       </editor>
       <editor
             class="org.libertyeiffel.eclipse.editors.TaskEditor"
             default="false"
             id="org.libertyeiffel.eclipse.editor.task"
-            name="Task Editor">
+            name="%editor.name.0">
       </editor>
    </extension>
    <extension
-         point="org.eclipse.ui.commands">
-      <command
-            defaultHandler="org.libertyeiffel.eclipse.handler.CallEditor"
-            id="org.libertyeiffel.eclipse.openEditor"
-            name="Open Task Editor">
-      </command>
+         id="org.libertyeiffel.eclipse.builder"
+         name="Eiffel Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder>
+         <run
+               class="org.libertyeiffel.eclipse.wizards.EiffelProjectBuilder">
+            <parameter
+                  name="optimize"
+                  value="true">
+            </parameter>
+            <parameter
+                  name="comment"
+                  value="Eiffel Builder">
+            </parameter>
+         </run>
+      </builder>
    </extension>
 
 </plugin>

@@ -1,5 +1,9 @@
 package org.libertyeiffel.eclipse;
 
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -29,6 +33,18 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		IResourceChangeListener resourceChangeListener = new IResourceChangeListener() {
+			
+			@Override
+			public void resourceChanged(IResourceChangeEvent event) {
+				IResource resource = event.getResource();
+				if (resource.getFileExtension().equals("e")) {
+					//TODO:
+					//Run compiler
+				}
+			}
+		};
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(resourceChangeListener);
 	}
 
 	/*
