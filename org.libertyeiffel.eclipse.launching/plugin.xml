@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType
+            category="org.eclipse.ui.externaltools"
+            delegate="org.libertyeiffel.eclipse.launching.launcher.EiffelLaunchDelegate"
+            id="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler"
+            modes="run, debug"
+            name="Liberty Eiffel Tool">
+      </launchConfigurationType>
+   </extension>
+
+</plugin>
