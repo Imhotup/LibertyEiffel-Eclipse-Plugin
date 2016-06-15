@@ -1,5 +1,5 @@
-GitRepositoriesView.GitDirectories=/home/fabu/workspace/LibertyEiffel-eclipse-plugin/.git\:/home/fabu/workspace/LibertyEiifel-Eclipse-Plugin/.git\:/home/fabu/workspace/org.libertyeiffel.eclipse/.git\:
-GitRepositoriesView.GitDirectories.relative=LibertyEiffel-eclipse-plugin/.git\:LibertyEiifel-Eclipse-Plugin/.git\:org.libertyeiffel.eclipse/.git\:
+GitRepositoriesView.GitDirectories=/home/fabu/workspace/.git\:
+GitRepositoriesView.GitDirectories.relative=.git\:
 RepositorySearchDialogDeepSearch=false
 RepositorySearchDialogSearchPath=/home/fabu/workspace/LibertyEiffel-Eclipse-Plugin
 eclipse.preferences.version=1
