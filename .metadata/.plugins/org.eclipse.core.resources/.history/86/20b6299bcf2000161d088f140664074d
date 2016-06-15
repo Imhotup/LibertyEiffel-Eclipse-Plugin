@@ -1,0 +1,5 @@
+package org.libertyeiffel.eclipse.wizards;
+
+public class LibertyEiffelProjectWizard {
+
+}
