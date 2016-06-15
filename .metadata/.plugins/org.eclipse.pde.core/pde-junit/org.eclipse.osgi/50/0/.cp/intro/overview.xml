@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+	<extensionContent id="org.eclipse.overview"
+		style="css/basic.css" name="AMP Overview" path="overview/@">
+		<group id="amp-overview" style-id="content-group">
+			<link label="Introducing AMP"
+				url="http://org.eclipse.ui.intro/showHelpTopic?id=/org.eclipse.amp.doc/help/Introduction.html"
+				id="amp-intro" style-id="content-link">
+				<text>Read about the Agent Modeling Platform and Agent-Based Modeling</text>
+			</link>
+			<link label="Using AMP"
+				url="http://org.eclipse.ui.intro/showHelpTopic?id=/org.eclipse.amp.doc/help/User_Guide.html"
+				id="amp-users" style-id="content-link">
+				<text>Learn how to use the Agent Modeling tools for desiging, building and executing agent-based models.</text>
+			</link>
+			<link label="More on Agent-Based Modeling"
+				url="http://org.eclipse.ui.intro/showHelpTopic?id=/org.ascape.doc/Content/manual/Section1.html"
+				id="ascape-manual" style-id="content-link">
+				<text>Get an in-depth understanding of Agent-Based Modeling and how to develop Java-based models in Ascape and Escape. (Requires installation of Ascape Documentation from http://ascape.sourceforge.net/eclipse.)</text>
+			</link>
+		</group>
+	</extensionContent>
+</introContent>

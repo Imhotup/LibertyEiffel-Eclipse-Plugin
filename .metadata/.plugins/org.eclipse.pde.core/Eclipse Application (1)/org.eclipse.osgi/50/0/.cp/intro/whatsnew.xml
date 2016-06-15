@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<introContent>
+	<extensionContent id="org.eclipse.amp.whatsnew"
+		style="css/basic.css" name="AMP New and Notable" path="whatsnew/@">
+		<group id="amp-whatsnew" style-id="content-group">
+			<link label="Agent Modeling Platform"
+				url="http://org.eclipse.ui.intro/showHelpTopic?id=/org.eclipse.amp.doc/help/New_and_Noteworthy.html"
+				id="amp-intro" style-id="content-link">
+				<text>Find out about new features and other improvements in AMP</text>
+			</link>
+		</group>
+	</extensionContent>
+</introContent>

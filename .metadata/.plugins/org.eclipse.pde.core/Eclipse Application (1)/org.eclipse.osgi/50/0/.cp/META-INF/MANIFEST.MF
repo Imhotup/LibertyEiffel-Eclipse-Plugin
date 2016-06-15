@@ -1,0 +1,88 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.7.1
+Bundle-Vendor: %Bundle-Vendor
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.eclipse.amp.ua;singleton:=true
+Created-By: 17.0-b16 (Sun Microsystems Inc.)
+Bundle-Version: 0.9.0.v20110610-0008
+Bundle-ManifestVersion: 2
+
+Name: about.ini
+SHA1-Digest: jdXmEV0s50AO/AXXrbO1OGOquu0=
+
+Name: OSGI-INF/l10n/bundle.properties
+SHA1-Digest: GGxqq3q5fNrKbYnubO+7EvUh/HE=
+
+Name: icons/amp48.png
+SHA1-Digest: 3e5fU2OU+U5IEnBnqdWV7MDn0mo=
+
+Name: intro/css/graphics/amp48.png
+SHA1-Digest: 3e5fU2OU+U5IEnBnqdWV7MDn0mo=
+
+Name: intro/samples.xml
+SHA1-Digest: 714NG9OYkZ+u7iG75eQLmdH9tvY=
+
+Name: intro/css/basic.css
+SHA1-Digest: VZzVisQIHq3/h9bOvb05zSGRa30=
+
+Name: icons/escape48.png
+SHA1-Digest: Vbo8o239+hZgEXRmDZm/7OMEApQ=
+
+Name: intro/css/graphics/escape48.png
+SHA1-Digest: Vbo8o239+hZgEXRmDZm/7OMEApQ=
+
+Name: icons/Escape.icns
+SHA1-Digest: PMMY0H+QpD+SVTbB5YljWFXwld8=
+
+Name: icons/ascape48.png
+SHA1-Digest: LNOtpRATnI5zE45WdWZ6vVL6Xvw=
+
+Name: icons/alt_window_32.gif
+SHA1-Digest: K8N2N3FZnwski6CPeJQ0NS/6cNI=
+
+Name: intro/css/graphics/ascape48.png
+SHA1-Digest: LNOtpRATnI5zE45WdWZ6vVL6Xvw=
+
+Name: intro/tutorials.xml
+SHA1-Digest: ZNEN2AxMnJSn5p3CdLXd6MkPNLg=
+
+Name: plugin.xml
+SHA1-Digest: /XBd2hJ5ClA87f3eI6a4eg2BMO0=
+
+Name: icons/alt_window_16.gif
+SHA1-Digest: hqphjmrNpWdZDNhMp6njS09WmlA=
+
+Name: META-INF/eclipse.inf
+SHA1-Digest: 09gN05tobgS/MdtqyTNQhOhB73M=
+
+Name: intro/overview.xml
+SHA1-Digest: yZp7kuzd6Xv+PkLWk4W3aIjjFNI=
+
+Name: icons/amp32.png
+SHA1-Digest: ZYja137l2Vna66iB/Stwt8vXK5U=
+
+Name: intro/css/graphics/amp32.png
+SHA1-Digest: ZYja137l2Vna66iB/Stwt8vXK5U=
+
+Name: .project
+SHA1-Digest: V29eVPxuZKMAxEVjhqJE65riNKU=
+
+Name: about.html
+SHA1-Digest: NQ0v+CR9kXEm+tSRsTavqpupKOY=
+
+Name: .classpath
+SHA1-Digest: O0S7TJCdMK4HNf3SmoL02YbLUdU=
+
+Name: icons/escape32.png
+SHA1-Digest: 6Y8GD6n0knF5nsd4kuAkWHTEI38=
+
+Name: intro/css/graphics/escape32.png
+SHA1-Digest: 6Y8GD6n0knF5nsd4kuAkWHTEI38=
+
+Name: build.properties
+SHA1-Digest: xD5rOLv7/RrC1kFwsXkE8LB0dpQ=
+
+Name: intro/whatsnew.xml
+SHA1-Digest: TND7IRWmYCHx/QJcFQwyNpc9Rb4=
+

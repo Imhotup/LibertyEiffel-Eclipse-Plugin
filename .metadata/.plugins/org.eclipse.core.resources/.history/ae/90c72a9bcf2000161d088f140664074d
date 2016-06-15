@@ -1,0 +1,7 @@
+package org.libertyeiffel.eclipse.wizards;
+
+import
+
+public class LibertyEiffelProjectWizard extends PluginTemplateProjectWizard {
+
+}

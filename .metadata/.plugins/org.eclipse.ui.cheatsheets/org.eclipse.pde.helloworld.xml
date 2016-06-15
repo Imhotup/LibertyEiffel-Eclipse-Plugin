@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<compositeCheatSheetState id="org.eclipse.pde.helloworld">
+<task id="TaskId_0" state="1"/>
+<task id="TaskId_1" state="1">
+<taskData buttonstate="0" id="TaskId_1" item="1">
+<completed item="0"/>
+<expanded item="1"/>
+</taskData>
+</task>
+<task id="TaskId_2" state="0"/>
+<task id="TaskId_3" state="0"/>
+<task id="TaskId_4" state="0"/>
+<task id="TaskId_5" state="0"/>
+<layout key="selectedTask" value="TaskId_1"/>
+</compositeCheatSheetState>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension
+        point="org.eclipse.ui.intro.configExtension">
+     <configExtension
+           configId="org.eclipse.ui.intro.universalConfig"
+            content="$nl$/intro/overview.xml">
+     </configExtension>
+     <configExtension
+           configId="org.eclipse.ui.intro.universalConfig"
+            content="$nl$/intro/samples.xml">
+     </configExtension>
+     <configExtension
+           configId="org.eclipse.ui.intro.universalConfig"
+           content="$nl$/intro/tutorials.xml">
+     </configExtension>
+     <configExtension
+           configId="org.eclipse.ui.intro.universalConfig"
+           content="$nl$/intro/whatsnew.xml">
+     </configExtension>
+  </extension>
+
+
+</plugin>
