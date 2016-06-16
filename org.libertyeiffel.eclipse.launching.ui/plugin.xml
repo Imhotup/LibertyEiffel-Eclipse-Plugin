@@ -17,5 +17,27 @@
             type="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler">
       </launchConfigurationTabGroup>
    </extension>
+   <extension
+         point="org.eclipse.debug.ui.launchShortcuts">
+      <shortcut
+            class="org.libertyeiffel.eclipse.launching.ui.launch.EiffelLaunchShortcut"
+            id="org.libertyeiffel.eclipse.launching.ui.eiffelCompilerShortcut"
+            label="Liberty Eiffel Compiler"
+            modes="run, debug">
+         <configurationType
+               id="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler">
+         </configurationType>
+         <contextualLaunch>
+            <enablement>
+               <with
+                     variable="org.libertyeiffel.eclipse.launching.ui.selection">
+                  <count
+                        value="+">
+                  </count>
+               </with>
+            </enablement>
+         </contextualLaunch>
+      </shortcut>
+   </extension>
 
 </plugin>

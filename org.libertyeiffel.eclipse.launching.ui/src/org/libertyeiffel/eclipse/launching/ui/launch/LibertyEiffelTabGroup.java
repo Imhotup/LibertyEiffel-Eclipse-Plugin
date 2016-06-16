@@ -11,7 +11,8 @@ public class LibertyEiffelTabGroup extends AbstractLaunchConfigurationTabGroup {
 	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
 		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[] {
 				new LibertyEiffelMainTab(),
-				new LibertyEiffelClasspathTab(),
+				new LibertyEiffelArgTab(),
+				new LibertyEiffelEnvTab(),
 				new CommonTab()
 		};
 		
