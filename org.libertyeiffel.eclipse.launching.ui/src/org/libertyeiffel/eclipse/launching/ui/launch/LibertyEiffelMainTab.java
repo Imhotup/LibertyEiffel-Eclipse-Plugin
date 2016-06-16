@@ -28,6 +28,7 @@ public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
 	private Text prograText;
 	private Button programButton;
 	private Text eiffelFullPathText;
+	private Button eiffelFileButton;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -93,6 +94,21 @@ public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
 			public void modifyText(ModifyEvent e) {
 				updateLaunchConfigurationDialog();
 				
+			}
+		});
+		
+		eiffelFileButton = createPushButton(composite, "Browse", null);
+		eiffelFileButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				browsePDAFiles();
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub				
 			}
 		});
 	}

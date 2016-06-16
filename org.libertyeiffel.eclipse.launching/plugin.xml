@@ -8,7 +8,7 @@
             delegate="org.libertyeiffel.eclipse.launching.launcher.EiffelLaunchDelegate"
             id="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler"
             modes="run, debug"
-            name="Liberty Eiffel Tool">
+            name="Liberty Eiffel Application">
       </launchConfigurationType>
    </extension>
 
