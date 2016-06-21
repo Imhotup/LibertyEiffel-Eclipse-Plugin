@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.libertyeiffel.eclipse.editor.EiffelEditor"
+            default="false"
+            extensions="e"
+            id="org.libertyeiffel.eclipse.editor.EiffelEditor"
+            name="Eiffel Editor">
+      </editor>
+   </extension>
+
+</plugin>
