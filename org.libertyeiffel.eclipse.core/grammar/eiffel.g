@@ -11,27 +11,29 @@
 //
 */
 
+grammar eiffel;
+
 classDeclaration :
 	  { indexing }
 	  classHeader
-	  { formalGenerics }
+	  { formalGenerics } 
 	  { obsolete }
 	  { inheritance }
 	  { creators }
 	  { features }
 	  { invariant }
-	  "end"
+	  'end'
 	;
 
 
 indexing :
-	  "indexing" indexList
+	  'indexing' indexList
 	;
 
 indexList :
 	  indexClause
-	  ( "\;" indexClause )*
-	  { "\;" }
+	  ( '\;' indexClause )*
+	  { '\;' }
 	;
 
 indexClause :
@@ -39,12 +41,12 @@ indexClause :
 	;
 
 index_ :
-	  identifier "\:"
+	  identifier '\:'
 	;
 
 indexTerms :
 	  indexValue
-	  ( "\," indexValue )*
+	  ( '\,' indexValue )*
 	;
 
 indexValue :
@@ -54,12 +56,12 @@ indexValue :
 
 
 classHeader :
-	  { headerMark } "class" className
+	  { headerMark } 'class' className
 	;
 
 headerMark :
-	  "deferred"
-	| "expanded"
+	  'deferred'
+	| 'expanded'
 	;
 
 className :
@@ -68,12 +70,12 @@ className :
 
 
 formalGenerics :
-	  "\[" formalGenericList "\]"
+	  '\[' formalGenericList '\]'
 	;
 
 formalGenericList :
 	  formalGeneric
-	  ( "\," formalGeneric )*
+	  ( '\,' formalGeneric )*
 	;
 
 formalGeneric :
@@ -86,12 +88,12 @@ formalGenericName :
 	;
 
 constraint :
-	  "\-\>" classType
+	  '\-\>' classType
 	;
 
 
 obsolete :
-	  "obsolete" message
+	  'obsolete' message
 	;
 
 message :
@@ -100,7 +102,7 @@ message :
 
 
 features :
-	  ( "feature" { featureClause } )+
+	  ( 'feature' { featureClause } )+
 	;
 
 featureClause :
@@ -109,7 +111,7 @@ featureClause :
 
 featureDeclarationList :
 	  featureDeclaration
-	  ( { "\;" } featureDeclaration )* { "\;" }
+	  ( { '\;' } featureDeclaration )* { '\;' }
 	;
 
 
@@ -118,25 +120,25 @@ featureDeclaration :
 	;
 
 declarationBody :
-	  formalArguments { typeMark } "is" routine
+	  formalArguments { typeMark } 'is' routine
 	| typeMark
-	  { "is"
+	  { 'is'
 	    ( manifestConstant
 	    | unique
 	    | routine
 	    )
 	  }
-	| "is" routine
+	| 'is' routine
 	;
 
 
 newFeatureList :
 	  newFeature
-	  ( "\," newFeature )*
+	  ( '\,' newFeature )*
 	;
 
 newFeature :
-	  { "frozen" } featureName
+	  { 'frozen' } featureName
 	;
 
 
@@ -147,16 +149,16 @@ featureName :
 	;
 
 prefix : /* lacks verification of string contents */
-	  "prefix" manifestString
+	  'prefix' manifestString
 	;
-/*	: "prefix" "\"" prefixOperator "\"" */
+/*	: 'prefix' '\'' prefixOperator '\'' */
 
 infix : /* lacks verification of string contents */
-	  "infix" manifestString
+	  'infix' manifestString
 	;
-/*	: "infix" "\"" infixOperator "\"" */
+/*	: 'infix' '\'' infixOperator '\'' */
 
-/*
+
 prefixOperator :
 	  unary | freeOperator
 	;
@@ -167,26 +169,26 @@ infixOperator :
 
 
 unary :
-	  "not" | "\+" | "\-"
+	  'not' | '\+' | '\-'
 	;
 
 binary :
-	  "\+" | "\-" | "\*" | "\/"
-	| "\<" | "\>" | "\<\=" | "\>\="
-	| "\/\/" | "\\\\" | "\^"
-	| "and" | "or" | "xor"
-	| "and" "then" | "or" "else" | "implies"
+	  '\+' | '\-' | '\*' | '\/'
+	| '\<' | '\>' | '\<\=' | '\>\='
+	| '\/\/' | '\\\\' | '\^'
+	| 'and' | 'or' | 'xor'
+	| 'and' 'then' | 'or' 'else' | 'implies'
 	;
-*/
+
 
 
 inheritance :
-	  "inherit" parentList
+	  'inherit' parentList
 	;
 
 parentList :
 	  parent
-	  ( "\;" parent )* { "\;" }
+	  ( '\;' parent )* { '\;' }
 	;
 
 parent :
@@ -194,46 +196,46 @@ parent :
 	;
 
 featureAdaption :
-	  { rename_ }
+	  { rename }
 	  { newExports }
 	  { undefine }
 	  { redefine }
-	  { select_ }
-	  "end"
+	  { select }
+	  'end'
 	;
 
 
-rename_ :
-	  "rename" renameList
+rename :
+	  'rename' renameList
 	;
 
 renameList :
 	  renamePair
-	  ( "\," renamePair )*
+	  ( '\,' renamePair )*
 	;
 
 renamePair :
-	  featureName "as" featureName
+	  featureName 'as' featureName
 	;
 
 
 clients :
-	  "\{" { classList } "\}"
+	  '\{' { classList } '\}'
 	;
 
 classList :
 	  className
-	  ( "\," className )*
+	  ( '\,' className )*
 	;
 
 
 newExports :
-	  "export" newExportList
+	  'export' newExportList
 	;
 
 newExportList :
 	  newExportItem
-	  ( "\;" newExportItem )*
+	  ( '\;' newExportItem )*
 	;
 
 newExportItem :
@@ -242,22 +244,22 @@ newExportItem :
 
 featureSet :
 	  featureList
-	| "all"
+	| 'all'
 	;
 
 featureList :
 	  featureName
-	  ( "\," featureName )*
+	  ( '\,' featureName )*
 	;
 
 
 formalArguments :
-	  "\(" entityDeclarationList "\)"
+	  '\(' entityDeclarationList '\)'
 	;
 
 entityDeclarationList :
 	  entityDeclarationGroup
-	  ( "\;" entityDeclarationGroup )* { "\;" }
+	  ( '\;' entityDeclarationGroup )* { '\;' }
 	;
 
 entityDeclarationGroup :
@@ -266,11 +268,11 @@ entityDeclarationGroup :
 
 identifierList :
 	  identifier
-	  ( "\," identifier )*
+	  ( '\,' identifier )*
 	;
 
 typeMark :
-	  "\:" type
+	  '\:' type
 	;
 
 
@@ -281,7 +283,7 @@ routine :
 	  routineBody
 	  { postcondition }
 	  { rescue }
-	  "end"
+	  'end'
 	;
 
 
@@ -300,17 +302,17 @@ internal :
 	;
 
 routineMark :
-	  "do"
-	| "once"
+	  'do'
+	| 'once'
 	;
 
 deferred :
-	  "deferred"
+	  'deferred'
 	;
 
 
 localDeclarations :
-	  "local" entityDeclarationList
+	  'local' entityDeclarationList
 	;
 
 
@@ -329,20 +331,20 @@ instruction :
 
 
 precondition :
-	  "require" { "else" } { assertion }
+	  'require' { 'else' } { assertion }
 	;
 
 postcondition :
-	  "ensure" { "then" } { assertion }
+	  'ensure' { 'then' } { assertion }
 	;
 
 invariant :
-	  "invariant" { assertion }
+	  'invariant' { assertion }
 	;
 
 assertion :
 	  assertionClause
-	  ( "\;" assertionClause )* { "\;" }
+	  ( '\;' assertionClause )* { '\;' }
 	;
 
 assertionClause :
@@ -355,7 +357,7 @@ unlabeledAssertionClause :
 	;
 
 tagMark :
-	  tag "\:"
+	  tag '\:'
 	;
 
 tag :
@@ -365,42 +367,42 @@ tag :
 
 /*
 old :
-	  "old" expression
+	  'old' expression
 	;
 */
 
 
 check_ :
-	  "check" { assertion } "end"
+	  'check' { assertion } 'end'
 	;
 
 
 variant :
-	  "variant" { tagMark } expression
+	  'variant' { tagMark } expression
 	;
 
 
 redefine :
-	  "redefine" featureList
+	  'redefine' featureList
 	;
 
 
 undefine :
-	  "undefine" featureList
+	  'undefine' featureList
 	;
 
 
-select_ :
-	  "select" featureList
+select :
+	  'select' featureList
 	;
 
 
 type :
-	  <<is_formal_generic(LATEXT(1))>>? formalGenericName /* formalGenericType */
-	| classType
+/*	formalGenericType  / * <<is_formal_generic(LATEXT(1))>>? formalGenericName / * formalGenericType */
+	 classType
 	| classTypeExpanded /* also classType */
 	| anchored
-	| bitType
+/* 	| bitType */
 	;
 
 classType :
@@ -408,24 +410,24 @@ classType :
 	;
 
 actualGenerics :
-	  "\[" typeList "\]"
+	  '\[' typeList '\]'
 	;
 
 typeList :
 	  type
-	  ( "\," type )*
+	  ( '\,' type )*
 	;
 
 classTypeExpanded :
-	  "expanded" className { actualGenerics } /* classType */
+	  'expanded' className { actualGenerics } /* classType */
 	;
 
-bitType :
+/*bitType :
 	  BIT constant
 	;
-
+*/
 anchored :
-	  "like" anchor
+	  'like' anchor
 	;
 
 anchor :
@@ -436,44 +438,44 @@ anchor :
 
 compound :
 	  instruction
-	  ( "\;" instruction )* { "\;" }
+	  ( '\;' instruction )* { '\;' }
 	;
 
 
 conditional :
-	  "if" thenPartList { elsePart } "end"
+	  'if' thenPartList { elsePart } 'end'
 	;
 
 thenPartList :
 	  thenPart
-	  ( "elseif" thenPart )*
+	  ( 'elseif' thenPart )*
 	;
 
 thenPart :
-	  booleanExpression "then" { compound }
+	  booleanExpression 'then' { compound }
 	;
 
 elsePart :
-	  "else" { compound }
+	  'else' { compound }
 	;
 
 
 multiBranch :
-	  "inspect" expression
-	  { whenPartList } { elsePart } "end"
+	  'inspect' expression
+	  { whenPartList } { elsePart } 'end'
 	;
 
 whenPartList :
-	  ( "when" whenPart )+
+	  ( 'when' whenPart )+
 	;
 
 whenPart :
-	  choices "then" { compound }
+	  choices 'then' { compound }
 	;
 
 choices :
 	  choice
-	  ( "\," choice )*
+	  ( '\,' choice )*
 	;
 
 choice :
@@ -487,11 +489,11 @@ interval :
 	;
 
 integerInterval :
-	  integerConstant "\.\." integerConstant
+	  integerConstant '\.\.' integerConstant
 	;
 
 characterInterval :
-	  characterConstant "\.\." characterConstant
+	  characterConstant '\.\.' characterConstant
 	;
 
 
@@ -500,35 +502,34 @@ loop :
 	  { invariant }
 	  { variant }
 	  loopBody
-	  "end"
+	  'end'
 	;
 
 
 initialization :
-	  "from" { compound }
+	  'from' { compound }
 	;
 
 loopBody :
-	  exit_ "loop" { compound }
+	  exit_ 'loop' { compound }
 	;
 
 exit_ :
-	  "until" booleanExpression
+	  'until' booleanExpression
 	;
 
 
 debug :
-	  "debug" debugBody "end"
+	  'debug' debugBody 'end'
 	;
 
 debugBody :
-	  ( "\(" debugKeyList "\)" { compound } )?
-	| { compound }
+	  ( '\(' debugKeyList '\)' { compound } )?
 	;
 
 debugKeyList :
 	  debugKey
-	  ( "\," debugKey )*
+	  ( '\,' debugKey )*
 	;
 
 debugKey :
@@ -537,16 +538,16 @@ debugKey :
 
 
 rescue :
-	  "rescue" { compound }
+	  'rescue' { compound }
 	;
 
 retry :
-	  "retry"
+	  'retry'
 	;
 
 
 unique :
-	  "unique"
+	  'unique'
 	;
 
 
@@ -558,8 +559,9 @@ entity :
 /*	  writable | readOnly */
 
 writable :
-	  <<is_local_entity(LATEXT(1)) || strcmp(LATEXT(1),"Result") == 0>>? local
-	| attribute
+/*	  <<is_local_entity(LATEXT(1)) || strcmp(LATEXT(1),'Result') == 0>>? local*/
+      local
+/*	| attribute */
 	;
 
 attribute :
@@ -584,8 +586,8 @@ formal :
 
 
 creators :
-	  "creation" creationClause
-	  ( "creation" creationClause )* { "creation" }
+	  'creation' creationClause
+	  ( 'creation' creationClause )* { 'creation' }
 	;
 
 creationClause :
@@ -594,21 +596,21 @@ creationClause :
 
 
 creation :
-	  "\!" { type } "\!" writable { creationCall }
+	  '\!' { type } '\!' writable { creationCall }
 	;
 
 creationCall :
-	  "\." unqualifiedCall
+	  '\.' unqualifiedCall
 	;
 
 
 assignment :
-	  writable "\:\=" expression
+	  writable '\:\=' expression
 	;
 
 
 assignmentAttempt :
-	  writable "\?\=" expression
+	  writable '\?\=' expression
 	;
 
 
@@ -617,12 +619,12 @@ call :
 	;
 
 parenthesizedQualifier :
-	  parenthesized "\."
+	  parenthesized '\.'
 	;
 
 callChain :
 	  unqualifiedCall
-	  ( "\." unqualifiedCall )*
+	  ( '\.' unqualifiedCall )*
 	;
 
 unqualifiedCall :
@@ -631,12 +633,12 @@ unqualifiedCall :
 
 
 actuals :
-	  "\(" actualList "\)"
+	  '\(' actualList '\)'
 	;
 
 actualList :
 	  actual
-	  ( "\," actual )*
+	  ( '\,' actual )*
 	;
 
 actual :
@@ -645,7 +647,7 @@ actual :
 	;
 
 address :
-	  "\$" identifier
+	  '\$' identifier
 	;
 
 
@@ -678,7 +680,7 @@ expPrec3 :
 	;
 
 opPrec3 :
-	  "implies"
+	  'implies'
 	;
 
 expPrec4 :
@@ -687,9 +689,9 @@ expPrec4 :
 	;
 
 opPrec4 :
-	  "or"
-	| "or" "else"
-	| "xor"
+	  'or'
+	| 'or' 'else'
+	| 'xor'
 	;
 
 expPrec5 :
@@ -698,8 +700,8 @@ expPrec5 :
 	;
 
 opPrec5 :
-	  "and"
-	| "and" "then"
+	  'and'
+	| 'and' 'then'
 	;
 
 expPrec6 :
@@ -708,12 +710,12 @@ expPrec6 :
 	;
 
 opPrec6 :
-	  "\="
-	| "\/\="
-	| "\<"
-	| "\>"
-	| "\<\="
-	| "\>\="
+	  '\='
+	| '\/\='
+	| '\<'
+	| '\>'
+	| '\<\='
+	| '\>\='
 	;
 
 expPrec7 :
@@ -722,8 +724,8 @@ expPrec7 :
 	;
 
 opPrec7 :
-	  "\+"
-	| "\-"
+	  '\+'
+	| '\-'
 	;
 
 expPrec8 :
@@ -732,10 +734,10 @@ expPrec8 :
 	;
 
 opPrec8 :
-	  "\*"
-	| "\/"
-	| "\/\/"
-	| "\\\\"
+	  '\*'
+	| '\/'
+	| '\/\/'
+	| '\\\\'
 	;
 
 expPrec9 :
@@ -744,7 +746,7 @@ expPrec9 :
 	;
 
 opPrec9 :
-	  "\^"
+	  '\^'
 	;
 
 expPrec10 :
@@ -763,15 +765,15 @@ expPrec11 :
 
 
 unaryOperators :
-	  "old"
-	| "not"
-	| "\+"
-	| "\-"
+	  'old'
+	| 'not'
+	| '\+'
+	| '\-'
 	| freeOperator
 	;
 
 elementarExp :
-	  parenthesized { "\." callChain }
+	  parenthesized { '\.' callChain }
 	| callChain
 	| booleanConstant
 	| characterConstant
@@ -784,7 +786,7 @@ elementarExp :
 	/* to solve INTEGER and REAL sign ambiguities */
 
 parenthesized :
-	  "\(" expression "\)"
+	  '\(' expression '\)'
 	;
 
 
@@ -816,8 +818,8 @@ realConstant :
 	;
 
 sign :
-	  "\+"
-	| "\-"
+	  '\+'
+	| '\-'
 	;
 
 
@@ -828,27 +830,27 @@ booleanConstant :
 
 
 manifestArray :
-	  "\<\<" expressionList "\>\>"
+	  '\<\<' expressionList '\>\>'
 	;
 
 expressionList :
 	  expression
-	  ( "\," expression )*
+	  ( '\,' expression )*
 	;
 
 
 strip :
-	  "strip" "\(" attributeList "\)"
+	  'strip' '\(' attributeList '\)'
 	;
 
 attributeList :
 	  identifier
-	  ( "\," identifier )*
+	  ( '\,' identifier )*
 	;
 
 
 external :
-	  "external" languageName { externalName }
+	  'external' languageName { externalName }
 	;
 
 languageName :
@@ -856,7 +858,7 @@ languageName :
 	;
 
 externalName :
-	  "alias" manifestString
+	  'alias' manifestString
 	;
 
 identifier :
@@ -888,28 +890,35 @@ freeOperator :
 	;
 
 
-#token TK_IDENTIFIER		"[a-zA-Z][_0-9a-zA-Z]*"
+TK_IDENTIFIER : ('[a-zA-Z][_0-9a-zA-Z]')*
+    ;
 
-#token "\""			<< zzmode(STRING); zzmore(); >>
-#lexclass STRING
-#token "\%~[\n\"]"		<< zzmore(); >>
-#token "\%\""			<< zzmore(); >>
-#token "\%\n[\ \t]*\%"		<< zzline++; /*zzreplstr("");*/ zzmore(); >>
-#token TK_MANIFEST_STRING "\""	<<zzmode(START);>>
-#token "[\ \t]"			<< zzmore(); >>
-#token "~[\%\"\ \t]"		<< zzmore(); >>
+/* '\'':			<< zzmode(STRING); zzmore(); >>*/
+/* #lexclass STRING
+#token '\%~[\n\']'		<< zzmore(); >>
+#token '\%\''			<< zzmore(); >>*/
+/* #token '\%\n[\ \t]*\%'		<< zzline++; / *zzreplstr('');* / zzmore(); >> */
+/* #token TK_MANIFEST_STRING: '\''	<<zzmode(START);>> */
+/* #token '[\ \t]'			<< zzmore(); >> */
+/* #token '~[\%\'\ \t]'		<< zzmore(); >> */
 
-#lexclass START
+/* #lexclass START */
 
 /* TK_INTEGER: verification of _ position not done!!! */
-#token TK_INTEGER		"[0-9][_0-9]*"
+TK_INTEGER :		('[0-9][_0-9]') ;
 
-#token TK_REAL			"[0-9]*\.[0-9]+{([eE]{[\+\-]}[0-9]+)}"
+ 
+TK_REAL :			('[0-9]*\.[0-9]+{([eE]{[\+\-]}[0-9]+)}') ;
 
-#token TK_BIT_CONSTANT		"[01]+[bB]"
+TK_BIT_CONSTANT:		'[01]+[bB]' ;
 
-#token TK_CHARACTER_CONSTANT	"\'(~[\%\']|(\%\/[0-9]+\/)|(\%[ABCDFHLNQRSTUV\%\'\"\(\)\<\>]))\'"
+TK_CHARACTER_CONSTANT:	'\'(~[\%\']|(\%\/[0-9]+\/)|(\%[ABCDFHLNQRSTUV\%\'\"\(\)\<\>]))\'' ;
 
 /* TK_FREE_OPERATOR: not complete, ambiguous definition */
-#token TK_FREE_OPERATOR		"[\@\#\|\&][\@\#\|\&\<\>\-\=\\\/\*\+\^]*"
+TK_FREE_OPERATOR :		'[\@\#\|\&][\@\#\|\&\<\>\-\=\\\/\*\+\^]*' ;
 
+TK_MANIFEST_STRING : '\"~\"\"';
+CURRENT : 'Current' ;
+RESULT : 'Result' ;
+TRUE_VAL : 'True' ;
+FALSE_VAL : 'False' ;
