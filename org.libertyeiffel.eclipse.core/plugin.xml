@@ -69,12 +69,6 @@
          point="org.eclipse.ui.perspectiveExtensions">
       <perspectiveExtension
             targetID="org.libertyeiffel.eclipse.perspective">
-         <newWizardShortcut
-               id="org.libertyeiffel.eclipse.wizard.new">
-         </newWizardShortcut>
-         <newWizardShortcut
-               id="org.libertyeiffel.eclipse.file.class">
-         </newWizardShortcut>
          <view
                id="org.libertyeiffel.eclipse.navigator"
                minimized="false"
@@ -82,13 +76,12 @@
                relationship="left"
                relative="org.eclipse.ui.editorss">
          </view>
-         <view
-               closeable="true"
-               id="org.libertyeiffel.eclipse.editor.EiffelEditor"
-               minimized="false"
-               relationship="stack"
-               relative="org.libertyeiffel.eclipse.navigator">
-         </view>
+         <newWizardShortcut
+               id="org.libertyeiffel.eclipse.file.class">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.libertyeiffel.eclipse.wizard.new">
+         </newWizardShortcut>
       </perspectiveExtension>
    </extension>
    <extension
@@ -121,7 +114,7 @@
          point="org.eclipse.core.contenttype.contentTypes">
       <content-type
             file-extensions="e"
-            id="org.libertyeiffel.eclipse.contentType"
+            id="org.libertyeiffel.eclipse.contentType.Class"
             name="%content-type.name.0"
             priority="normal">
       </content-type>

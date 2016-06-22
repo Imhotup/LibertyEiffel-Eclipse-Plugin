@@ -5,7 +5,6 @@
          point="org.eclipse.ui.views">
       <view
             class="org.eclipse.ui.navigator.CommonNavigator"
-            icon="icons/sample.gif"
             id="org.libertyeiffel.eclipse.navigator"
             name="Eiffel Navigator">
       </view>

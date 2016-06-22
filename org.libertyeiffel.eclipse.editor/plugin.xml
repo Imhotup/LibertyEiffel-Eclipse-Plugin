@@ -4,11 +4,14 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="org.libertyeiffel.eclipse.editor.EiffelEditor"
-            default="false"
+            class="org.libertyeiffel.eclipse.editor.editor.EiffelEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             extensions="e"
             id="org.libertyeiffel.eclipse.editor.EiffelEditor"
             name="Eiffel Editor">
+         <contentTypeBinding
+               contentTypeId="org.libertyeiffel.eclipse.contentType.Class">
+         </contentTypeBinding>
       </editor>
    </extension>
 
