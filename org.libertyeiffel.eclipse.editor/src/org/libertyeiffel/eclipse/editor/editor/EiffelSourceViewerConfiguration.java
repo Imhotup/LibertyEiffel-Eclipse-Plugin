@@ -6,8 +6,11 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
+import org.eclipse.jface.text.presentation.IPresentationReconciler;
+import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.MonoReconciler;
+import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
@@ -38,6 +41,20 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 	public IReconciler getReconciler(ISourceViewer sourceViewer) {
 		MonoReconciler reconciler = new MonoReconciler(new EiffelReconcilingStrategy(), true);
 		reconciler.install(sourceViewer);
+		
+		return reconciler;
+	}
+	
+	@Override
+	public IPresentationReconciler getPresentationReconciler(ISourceViewer viewer) {
+		PresentationReconciler reconciler = new PresentationReconciler();
+		DefaultDamagerRepairer repairer = new DefaultDamagerRepairer(new 
+				EiffelCodeScanner(new EiffelColorProvider()));
+		reconciler.setDamager(repairer, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(repairer, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(repairer, EiffelPartitionScanner.SINGLELINE_COMMENT);
+		reconciler.setRepairer(repairer, EiffelPartitionScanner.MULTILINE_COMMENT);
+		reconciler.setRepairer(repairer, EiffelPartitionScanner.STRING);
 		
 		return reconciler;
 	}

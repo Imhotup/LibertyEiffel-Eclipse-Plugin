@@ -16,7 +16,7 @@ import org.eclipse.jface.text.rules.WordRule;
 public class EiffelCodeScanner extends RuleBasedScanner {
 
 	private static String[] eKeywords = {
-			"class", "end", "if", "else", "true"
+			"class", "end", "if", "else", "true", "while", "for"
 	};
 	
 	public EiffelCodeScanner(EiffelColorProvider provider) {
