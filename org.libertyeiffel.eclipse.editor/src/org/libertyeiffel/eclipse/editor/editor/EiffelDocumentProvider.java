@@ -13,6 +13,7 @@ public class EiffelDocumentProvider extends TextFileDocumentProvider {
 		
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	protected FileInfo createFileInfo(Object element) throws CoreException{
 		FileInfo info = super.createFileInfo(element);
@@ -24,8 +25,9 @@ public class EiffelDocumentProvider extends TextFileDocumentProvider {
 		IDocument document = info.fTextFileBuffer.getDocument();
 		
 		if (document != null) {
-			IDocumentPartitioner partitioner = new FastPartitioner(EiffelEditorPlugin
-					.getDefault().getPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
+			EiffelPartitionScanner partitionScanner = EiffelEditorPlugin
+					.getDefault().getPartitionScanner();
+			IDocumentPartitioner partitioner = new FastPartitioner(partitionScanner, EiffelPartitionScanner.PARTITION_TYPE);
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
 		}
