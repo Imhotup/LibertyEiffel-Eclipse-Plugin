@@ -32,24 +32,4 @@ public class EiffelDocumentProvider extends TextFileDocumentProvider {
 		
 		return info;
 	}
-
-//	@Override
-//	protected IDocument createDocument(Object element) throws CoreException {
-//		IDocument document = super.createDocument(element);
-//		
-//		if (document instanceof IDocumentExtension3) {
-//			IDocumentExtension3 extension3 = (IDocumentExtension3) document;
-//			IDocumentPartitioner partitioner = new FastPartitioner(EiffelEditorPlugin
-//					.getDefault().getPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
-//			extension3.setDocumentPartitioner(EiffelEditorPlugin.MY_PARTITIONING, partitioner);
-//			partitioner.connect(document);
-//		}
-//		
-//		return document;
-//	}
-//	
-//	@Override
-//	protected IDocument createEmptyDocument() {
-//		return new EiffelDocument();
-//	}
 }

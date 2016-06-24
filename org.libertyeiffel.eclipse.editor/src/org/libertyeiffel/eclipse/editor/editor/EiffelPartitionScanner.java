@@ -17,10 +17,12 @@ public class EiffelPartitionScanner extends RuleBasedPartitionScanner {
 	public final static String MULTILINE_COMMENT = "multiline_comment";
 	public final static String SINGLELINE_COMMENT = "singleline_comment";
 	public final static String STRING = "string";
+	public final static String MULTILINE_STRING = "multiline_string";
 	public final static String[] PARTITION_TYPE = new String[] {
 			MULTILINE_COMMENT,
 			SINGLELINE_COMMENT,
-			STRING
+			STRING,
+			MULTILINE_STRING
 	};
 	
 	public EiffelPartitionScanner() {
@@ -29,8 +31,12 @@ public class EiffelPartitionScanner extends RuleBasedPartitionScanner {
 		IToken multilineComment = new Token(MULTILINE_COMMENT);
 		IToken singlelineComment = new Token(SINGLELINE_COMMENT);
 		IToken string = new Token(STRING);
+		IToken multilinestring = new Token(MULTILINE_STRING);
 		
 		List<Object> rules = new ArrayList<>();
+		
+		//Add rules for multi-line comments
+		rules.add(new MultiLineRule("--[[", "]]", multilineComment));
 		
 		//Add rule for single line comments.
 		rules.add(new EndOfLineRule("--", singlelineComment));
@@ -40,7 +46,7 @@ public class EiffelPartitionScanner extends RuleBasedPartitionScanner {
 		rules.add(new SingleLineRule("'", "'", string, '\\'));
 		
 		//Add rules for multi-line comments and eiffeldocs
-		rules.add(new MultiLineRule("--[[", "]]", multilineComment, (char) 0, true));
+		rules.add(new MultiLineRule("[[", "]]", multilinestring));
 		
 		IPredicateRule[] result = new IPredicateRule[rules.size()];
 		rules.toArray(result);
