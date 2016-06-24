@@ -12,6 +12,7 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
+import org.libertyeiffel.eclipse.editor.EiffelEditorPlugin;
 
 public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 

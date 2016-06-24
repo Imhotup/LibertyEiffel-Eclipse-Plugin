@@ -1,13 +1,24 @@
 package org.libertyeiffel.eclipse.editor;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.libertyeiffel.eclipse.editor.editor.EiffelPartitionScanner;
 
 public class EiffelEditorPlugin extends AbstractUIPlugin {
 	public final static String MY_PARTITIONING = "___my__partitioning____";
 	
+	private static EiffelEditorPlugin editorPlugin;
+	
 	private static EiffelPartitionScanner eiffelPartitionScanner;
 	
-	public static EiffelPartitionScanner getMyPartitionScanner() {
+	public EiffelEditorPlugin() {
+		editorPlugin = this;
+	}
+	
+	public static EiffelEditorPlugin getDefault() {
+		return editorPlugin;
+	}
+	
+	public EiffelPartitionScanner getPartitionScanner() {
 		if (eiffelPartitionScanner == null) {
 			eiffelPartitionScanner = new EiffelPartitionScanner();
 		}

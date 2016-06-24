@@ -5,9 +5,9 @@
          point="org.eclipse.ui.editors">
       <editor
             class="org.libertyeiffel.eclipse.editor.editor.EiffelEditor"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             extensions="e"
-            id="org.libertyeiffel.eclipse.editor.EiffelEditor"
+            id="org.libertyeiffel.eclipse.editor.eiffeleditor"
             name="Eiffel Editor">
          <contentTypeBinding
                contentTypeId="org.libertyeiffel.eclipse.contentType.Class">

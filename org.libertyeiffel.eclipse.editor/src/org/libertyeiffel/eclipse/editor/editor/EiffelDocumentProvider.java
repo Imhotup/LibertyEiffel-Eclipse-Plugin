@@ -6,6 +6,7 @@ import org.eclipse.jface.text.IDocumentExtension3;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.libertyeiffel.eclipse.editor.EiffelEditorPlugin;
 
 public class EiffelDocumentProvider extends FileDocumentProvider {
 
@@ -16,7 +17,7 @@ public class EiffelDocumentProvider extends FileDocumentProvider {
 		if (document instanceof IDocumentExtension3) {
 			IDocumentExtension3 extension3 = (IDocumentExtension3) document;
 			IDocumentPartitioner partitioner = new FastPartitioner(EiffelEditorPlugin
-					.getMyPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
+					.getDefault().getPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
 			extension3.setDocumentPartitioner(EiffelEditorPlugin.MY_PARTITIONING, partitioner);
 			partitioner.connect(document);
 		}

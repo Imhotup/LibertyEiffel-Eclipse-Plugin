@@ -1,5 +1,6 @@
 package org.libertyeiffel.eclipse.editor.editor;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.swt.widgets.Composite;
@@ -10,8 +11,7 @@ public class EiffelEditor extends TextEditor {
 	public EiffelEditor() {
 		super();
 		
-		setDocumentProvider(new EiffelDocumentProvider());
-		setSourceViewerConfiguration(new EiffelSourceViewerConfiguration());
+		//setDocumentProvider(new EiffelDocumentProvider());
 	}
 
 	@Override
@@ -22,8 +22,6 @@ public class EiffelEditor extends TextEditor {
 		//ensure decoration support has been created and configured.
 		getSourceViewerDecorationSupport(viewer);
 		
-		//more custom stuff
-		
 		return viewer;
 	}
 	
@@ -31,5 +29,15 @@ public class EiffelEditor extends TextEditor {
 	protected void initializeEditor() {
 		super.initializeEditor();
 		setSourceViewerConfiguration(new EiffelSourceViewerConfiguration());
+	}
+	
+	public void doSave(IProgressMonitor monitor) {
+		super.doSave(monitor);
+		// captured a file save, handle anything else
+		System.out.println("saving file: " + this.getEditorInput().getName());
+	}
+	
+	public void dispose() {
+		super.dispose();
 	}
 }
