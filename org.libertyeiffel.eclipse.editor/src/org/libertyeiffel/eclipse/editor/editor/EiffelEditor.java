@@ -11,6 +11,7 @@ public class EiffelEditor extends TextEditor {
 	public EiffelEditor() {
 		super();
 		
+		setSourceViewerConfiguration(new EiffelSourceViewerConfiguration());
 		//setDocumentProvider(new EiffelDocumentProvider());
 	}
 
@@ -23,12 +24,6 @@ public class EiffelEditor extends TextEditor {
 		getSourceViewerDecorationSupport(viewer);
 		
 		return viewer;
-	}
-	
-	@Override
-	protected void initializeEditor() {
-		super.initializeEditor();
-		setSourceViewerConfiguration(new EiffelSourceViewerConfiguration());
 	}
 	
 	public void doSave(IProgressMonitor monitor) {

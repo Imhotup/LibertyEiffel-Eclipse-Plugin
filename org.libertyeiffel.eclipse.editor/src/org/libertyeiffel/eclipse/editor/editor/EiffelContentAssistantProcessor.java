@@ -14,7 +14,7 @@ import org.libertyeiffel.eclipse.model.EiffelModel;
 
 public class EiffelContentAssistantProcessor implements IContentAssistProcessor {
 	private final IContextInformation[] NO_CONTEXTS = { };
-	private final char[] PROPOSAL_ACTIVATION_CHARS = { '.', 's','f','p','n','m', };
+	private final char[] PROPOSAL_ACTIVATION_CHARS = { '.' };
 	private ICompletionProposal[] NO_COMPLETIONS = { };
 
 	@Override
