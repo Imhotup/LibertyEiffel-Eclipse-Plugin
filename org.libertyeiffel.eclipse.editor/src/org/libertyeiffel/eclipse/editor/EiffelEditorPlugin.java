@@ -18,11 +18,9 @@ public class EiffelEditorPlugin extends AbstractUIPlugin {
 		return editorPlugin;
 	}
 	
-	public EiffelPartitionScanner getPartitionScanner() {
-		if (eiffelPartitionScanner == null) {
+	public static EiffelPartitionScanner getPartitionScanner() {
+		if (eiffelPartitionScanner == null)
 			eiffelPartitionScanner = new EiffelPartitionScanner();
-		}
-		
 		return eiffelPartitionScanner;
 	}
 }
