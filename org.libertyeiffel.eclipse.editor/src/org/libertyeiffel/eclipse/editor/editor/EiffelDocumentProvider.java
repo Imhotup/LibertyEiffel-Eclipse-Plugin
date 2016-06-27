@@ -27,7 +27,8 @@ public class EiffelDocumentProvider extends TextFileDocumentProvider {
 		if (document != null) {
 			EiffelPartitionScanner partitionScanner = EiffelEditorPlugin
 					.getDefault().getPartitionScanner();
-			IDocumentPartitioner partitioner = new FastPartitioner(partitionScanner, EiffelPartitionScanner.PARTITION_TYPE);
+			IDocumentPartitioner partitioner = new FastPartitioner(partitionScanner, 
+					EiffelPartitionScanner.PARTITION_TYPE);
 			partitioner.connect(document);
 			document.setDocumentPartitioner(partitioner);
 		}
