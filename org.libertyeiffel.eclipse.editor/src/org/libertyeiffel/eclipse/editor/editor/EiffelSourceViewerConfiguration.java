@@ -11,6 +11,7 @@ import org.eclipse.jface.text.presentation.PresentationReconciler;
 import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.reconciler.MonoReconciler;
 import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
@@ -61,8 +62,7 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 	
 	@Override
 	public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
-		IAutoEditStrategy strategy = (IDocument.DEFAULT_CONTENT_TYPE.equals(contentType) ? 
-				new EiffelAutoEditStrategy() : new DefaultIndentLineAutoEditStrategy());
+		IAutoEditStrategy strategy = new DefaultIndentLineAutoEditStrategy();
 		
 		return new IAutoEditStrategy[] {strategy};
 	}
@@ -84,7 +84,10 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 		return assistant;
 	}
 	
-	
+	@Override
+	public IAnnotationHover getAnnotationHover(ISourceViewer viewer) {
+		return new EiffelAnnotationHOver();
+	}
 	
 	@Override
 	public IUndoManager getUndoManager(ISourceViewer sourceViewer) {
