@@ -75,8 +75,9 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 		assistant.setContentAssistProcessor(new EiffelContentAssistantProcessor(),
 				IDocument.DEFAULT_CONTENT_TYPE);
 		
-		assistant.setAutoActivationDelay(0);
+		assistant.setAutoActivationDelay(100);
 		assistant.enableAutoActivation(true);
+		assistant.enableAutoInsert(true);
 		
 		assistant.setProposalSelectorBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		
