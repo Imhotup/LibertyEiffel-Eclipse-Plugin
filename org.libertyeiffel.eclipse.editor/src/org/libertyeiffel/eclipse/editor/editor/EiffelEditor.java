@@ -11,6 +11,15 @@ public class EiffelEditor extends TextEditor {
 		setDocumentProvider(new EiffelDocumentProvider());
 	}
 	
+//	@Override
+//	protected void createActions() {
+//		Action action = new ContentAssistAction(resourceBundle, "ContentAssistProposal", this);
+//		String id = ITextEditorActionDefinitionIds.CONTENT_ASSIST_PROPOSALS;
+//		action.setActionDefinitionId(id);
+//		setAction("ContentAssistProposal", action);
+//		markAsStateDependentAction("ContentAssistProposal", true);
+//	};
+	
 	@Override
 	public void dispose() {
 		super.dispose();

@@ -17,7 +17,7 @@ public class EiffelCodeScanner extends RuleBasedScanner {
 
 	private static String[] eKeywords = {
 			"class", "end", "if", "else", "true", "while", "for",
-			"create", "feature"
+			"create", "feature", "ANY"
 	};
 	
 	public EiffelCodeScanner(EiffelColorProvider provider) {

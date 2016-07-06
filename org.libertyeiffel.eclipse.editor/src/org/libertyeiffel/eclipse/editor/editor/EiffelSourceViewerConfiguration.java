@@ -5,6 +5,7 @@ import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
@@ -70,6 +71,9 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 		ContentAssistant assistant = new ContentAssistant();
+		IContentAssistProcessor processor = new EiffelContentAssistantProcessor();
+		assistant.setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
 		
 		assistant.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
 		assistant.setContentAssistProcessor(new EiffelContentAssistantProcessor(),
