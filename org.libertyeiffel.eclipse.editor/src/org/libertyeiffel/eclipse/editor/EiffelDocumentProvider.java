@@ -16,7 +16,7 @@ public class EiffelDocumentProvider extends FileDocumentProvider {
 		if (document instanceof IDocumentExtension3) {
 			IDocumentExtension3 extension3 = (IDocumentExtension3) document;
 			IDocumentPartitioner partitioner = new FastPartitioner(EiffelEditorPlugin
-					.getMyPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
+					.getPartitionScanner(), EiffelPartitionScanner.PARTITION_TYPE);
 			extension3.setDocumentPartitioner(EiffelEditorPlugin.MY_PARTITIONING, partitioner);
 			partitioner.connect(document);
 		}
