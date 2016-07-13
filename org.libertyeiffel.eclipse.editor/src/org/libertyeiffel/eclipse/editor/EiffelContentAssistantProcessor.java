@@ -3,7 +3,6 @@ package org.libertyeiffel.eclipse.editor;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
@@ -18,8 +17,7 @@ public class EiffelContentAssistantProcessor implements IContentAssistProcessor 
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		List<ICompletionProposal> proposals = new ArrayList<ICompletionProposal>();
 		
-		//compute proposals at offset
-		IDocument document = viewer.getDocument();
+		viewer.getDocument();
 		
 		
 		return proposals.toArray(new ICompletionProposal[proposals.size()]);
