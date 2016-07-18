@@ -16,6 +16,8 @@ import org.libertyeiffel.eclipse.launching.launcher.util.Constants;
 public class EiffelLaunchDelegate implements ILaunchConfigurationDelegate {
 	
 	private boolean warned = false;
+	
+	public static String[] EIFFEL_ENV_VAR_SET = new String[]{"APPDATA","PATH","TEMP","TMP","SystemDrive"};
 
 	@Override
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
@@ -32,8 +34,6 @@ public class EiffelLaunchDelegate implements ILaunchConfigurationDelegate {
 		String[] classpath = getClasspath(configuration);
 		
 	}
-	
-	public static String[] EIFFEL_ENV_VAR_SET = new String[]{"APPDATA","PATH","TEMP","TMP","SystemDrive"};
 
 	private String[] getEnvironment(ILaunchConfiguration configuration) throws CoreException {
 		Map<String, String> envm = new HashMap<String, String>();

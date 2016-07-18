@@ -4,7 +4,7 @@
    <extension
          point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
-            configTypeID="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler"
+            configTypeID="org.libertyeiffel.eclipse.launch.EiffelConfigurationType"
             icon="icons/sample.gif"
             id="org.libertyeiffel.eclipse.launching.ui.launchConfigurationTypeImage.eiffel">
       </launchConfigurationTypeImage>
@@ -14,7 +14,7 @@
       <launchConfigurationTabGroup
             class="org.libertyeiffel.eclipse.launching.ui.launch.LibertyEiffelTabGroup"
             id="org.libertyeiffel.eclipse.launching.ui.launchConfigurationTabGroup.eiffel"
-            type="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler">
+            type="org.libertyeiffel.eclipse.launch.EiffelConfigurationType">
       </launchConfigurationTabGroup>
    </extension>
    <extension
