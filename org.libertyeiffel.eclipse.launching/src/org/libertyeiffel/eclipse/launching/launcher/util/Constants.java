@@ -18,11 +18,23 @@
  */
 package org.libertyeiffel.eclipse.launching.launcher.util;
 
+import org.libertyeiffel.eclipse.launching.launcher.LaunchingPlugin;
+
 public class Constants {
+	
+	public static final String ID_DEBUG_MODEL = "debugModel";
 
 	public static final String LAUNCH_CONFIGURATION_TYPE = 
 			"org.libertyeiffel.eclipse.launch.EiffelConfigurationType";
 	
 	public static final String ATTR_ENVIRONMENT_VARIABLES = "attr_environment_variables";
+	
+	public static final String ATTR_PROJECT = ID_DEBUG_MODEL + ".ATTR_PROJECT";
+	
+	public static final String ATTR_FILE_LOCATION = "ATTR_FILE_LOCATION";
+	
+	public static final String ATTR_WORKING_DIRECTORY = LaunchingPlugin.getUniqueIdentifier() + ".WORKING_DIRECTORY";
+	
+	public static final int ERR_WORKING_DIRECTORY_DOES_NOT_EXIST = 108;
 	
 }
