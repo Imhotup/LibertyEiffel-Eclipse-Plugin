@@ -12,13 +12,9 @@ import org.eclipse.jface.text.rules.SingleLineRule;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 import org.eclipse.jface.text.rules.WordRule;
+import org.libertyeiffel.eclipse.editor.parser.Parser;
 
 public class EiffelCodeScanner extends RuleBasedScanner {
-
-	private static String[] eKeywords = {
-			"class", "end", "if", "else", "true", "while", "for",
-			"create", "feature", "ANY"
-	};
 	
 	public EiffelCodeScanner(EiffelColorProvider provider) {
 		IToken keyword = new Token(new TextAttribute(provider
@@ -44,8 +40,8 @@ public class EiffelCodeScanner extends RuleBasedScanner {
 		
 		//Add word rule for keywords.
 		WordRule wordRule = new WordRule(new EiffelWordDetector(), other);
-		for (int i = 0; i < eKeywords.length; i++) {
-			wordRule.addWord(eKeywords[i], keyword);
+		for (int i = 0; i < Parser.KEYWORDS.length; i++) {
+			wordRule.addWord(Parser.KEYWORDS[i], keyword);
 			rules.add(wordRule);
 			
 			IRule[] result = new IRule[rules.size()];
