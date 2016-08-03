@@ -3,6 +3,7 @@ package org.libertyeiffel.eclipse.editor.editor;
 import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.IUndoManager;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
@@ -17,7 +18,6 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
-import org.libertyeiffel.eclipse.editor.EiffelEditorPlugin;
 
 public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 
@@ -54,9 +54,9 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 				EiffelCodeScanner(new EiffelColorProvider()));
 		reconciler.setDamager(repairer, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(repairer, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setRepairer(repairer, EiffelPartitionScanner.SINGLELINE_COMMENT);
-		reconciler.setRepairer(repairer, EiffelPartitionScanner.MULTILINE_COMMENT);
-		reconciler.setRepairer(repairer, EiffelPartitionScanner.STRING);
+//		reconciler.setRepairer(repairer, EiffelPartitionScanner.SINGLELINE_COMMENT);
+//		reconciler.setRepairer(repairer, EiffelPartitionScanner.MULTILINE_COMMENT);
+//		reconciler.setRepairer(repairer, EiffelPartitionScanner.STRING);
 		
 		return reconciler;
 	}
@@ -86,6 +86,11 @@ public class EiffelSourceViewerConfiguration extends SourceViewerConfiguration {
 		assistant.setProposalSelectorBackground(Display.getDefault().getSystemColor(SWT.COLOR_WHITE));
 		
 		return assistant;
+	}
+	@Override
+	public ITextHover getTextHover(ISourceViewer sourceViewer, String contentType) {
+		
+		return new EIffelTextHover();
 	}
 	
 	@Override

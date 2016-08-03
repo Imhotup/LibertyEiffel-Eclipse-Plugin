@@ -14,7 +14,7 @@ public class EIffelTextHover implements ITextHover {
 
 	@Override
 	public IRegion getHoverRegion(ITextViewer textViewer, int offset) {
-		// TODO Auto-generated method stub
+		
 		return WordFinder.findWord(textViewer.getDocument(), offset);
 	}
 

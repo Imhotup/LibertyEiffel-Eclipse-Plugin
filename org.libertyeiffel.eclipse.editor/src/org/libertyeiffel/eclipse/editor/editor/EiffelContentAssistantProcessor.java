@@ -10,29 +10,40 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
-import org.libertyeiffel.eclipse.model.EiffelModel;
 
 public class EiffelContentAssistantProcessor implements IContentAssistProcessor {
 	private final IContextInformation[] NO_CONTEXTS = { };
-	private final char[] PROPOSAL_ACTIVATION_CHARS = { '.' };
+	private final char[] PROPOSAL_ACTIVATION_CHARS = { '.', '"'};
 	private ICompletionProposal[] NO_COMPLETIONS = { };
 
 	@Override
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		
 		try {
-			List<ICompletionProposal> proposals = new ArrayList<ICompletionProposal>();
+			List<ICompletionProposal> completionProposals = new ArrayList<ICompletionProposal>();
 			IDocument document = viewer.getDocument();
 			String prefix = lastWord(document, offset);
 			String indent = lastIndent(document, offset);
-			EiffelModel model = EiffelModel.getModel(document, null);
-			model.getContentProposals(prefix, indent, offset, proposals);
-			
-			return proposals.toArray(new ICompletionProposal[proposals.size()]);
+//			EiffelModel model = EiffelModel.getModel(document, null);
+//			model.getContentProposals(prefix, indent, offset, completionProposals);
+		
+			return completionProposals.toArray(new ICompletionProposal[completionProposals.size()]);
 			
 		} catch (Exception e) {
 			return NO_COMPLETIONS;
 		}
+	}
+	
+	@Override
+	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
+		
+		return NO_CONTEXTS;
+	}
+
+	@Override
+	public char[] getCompletionProposalAutoActivationCharacters() {
+		
+		return PROPOSAL_ACTIVATION_CHARS;
 	}
 
 	private String lastWord(IDocument document, int offset) {
@@ -65,34 +76,22 @@ public class EiffelContentAssistantProcessor implements IContentAssistProcessor 
 		}
 		return "";
 	}
-	
-	@Override
-	public IContextInformation[] computeContextInformation(ITextViewer viewer, int offset) {
-		
-		return NO_CONTEXTS;
-	}
-
-	@Override
-	public char[] getCompletionProposalAutoActivationCharacters() {
-		
-		return PROPOSAL_ACTIVATION_CHARS;
-	}
 
 	@Override
 	public char[] getContextInformationAutoActivationCharacters() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String getErrorMessage() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return "No Content Assist Found";
 	}
 
 	@Override
 	public IContextInformationValidator getContextInformationValidator() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -5,7 +5,6 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.ui.editors.text.TextFileDocumentProvider;
-import org.libertyeiffel.eclipse.editor.EiffelEditorPlugin;
 
 public class EiffelDocumentProvider extends TextFileDocumentProvider {
 	

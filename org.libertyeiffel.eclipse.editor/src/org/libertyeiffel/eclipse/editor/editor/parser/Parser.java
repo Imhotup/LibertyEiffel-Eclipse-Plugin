@@ -1,4 +1,4 @@
-package org.libertyeiffel.eclipse.editor.parser;
+package org.libertyeiffel.eclipse.editor.editor.parser;
 
 public class Parser {
 	
