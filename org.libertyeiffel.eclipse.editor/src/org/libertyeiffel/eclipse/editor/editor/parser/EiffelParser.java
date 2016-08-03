@@ -1,3 +1,4 @@
+package org.libertyeiffel.eclipse.editor.editor.parser;
 // $ANTLR 3.5.2 eiffel.g 2016-06-17 16:44:27
 
 import org.antlr.runtime.*;
@@ -6,7 +7,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 @SuppressWarnings("all")
-public class eiffelParser extends Parser {
+public class EiffelParser extends Parser {
 	public static final String[] tokenNames = new String[] {
 		"<invalid>", "<EOR>", "<DOWN>", "<UP>", "CURRENT", "FALSE_VAL", "RESULT", 
 		"TK_BIT_CONSTANT", "TK_CHARACTER_CONSTANT", "TK_FREE_OPERATOR", "TK_IDENTIFIER", 
@@ -126,10 +127,10 @@ public class eiffelParser extends Parser {
 	// delegators
 
 
-	public eiffelParser(TokenStream input) {
+	public EiffelParser(TokenStream input) {
 		this(input, new RecognizerSharedState());
 	}
-	public eiffelParser(TokenStream input, RecognizerSharedState state) {
+	public EiffelParser(TokenStream input, RecognizerSharedState state) {
 		super(input, state);
 	}
 
