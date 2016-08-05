@@ -18,8 +18,6 @@
  */
 package org.libertyeiffel.eclipse.launching.launcher.util;
 
-import org.libertyeiffel.eclipse.launching.launcher.LaunchingPlugin;
-
 public class Constants {
 	
 	public static final String ID_DEBUG_MODEL = "debugModel";
@@ -31,9 +29,13 @@ public class Constants {
 	
 	public static final String ATTR_PROJECT = ID_DEBUG_MODEL + ".ATTR_PROJECT";
 	
+	public static final String ATTR_LE_PROGRAM = ID_DEBUG_MODEL + ".ATTR_LE_PROGRAM";
+	
 	public static final String ATTR_FILE_LOCATION = "ATTR_FILE_LOCATION";
 	
 	public static final String ATTR_WORKING_DIRECTORY = ID_DEBUG_MODEL + ".WORKING_DIRECTORY";
+	
+	public static final String ATTR_LEC_FULL_PATH = "LEC.FULLPATH";
 	
 	public static final int ERR_WORKING_DIRECTORY_DOES_NOT_EXIST = 108;
 	

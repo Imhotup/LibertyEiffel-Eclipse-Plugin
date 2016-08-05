@@ -13,8 +13,8 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -23,12 +23,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
+import org.libertyeiffel.eclipse.launching.launcher.util.Constants;
 
 public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
-	private Text prograText;
-	private Button programButton;
-	private Text eiffelFullPathText;
-	private Button eiffelFileButton;
+	
+	private Text eiffelProgramText;
+	private Button eiffelProgramButton;
+	private Text seFullPathText;
 
 	@Override
 	public void createControl(Composite parent) {
@@ -45,106 +46,69 @@ public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
 		createVerticalSpacer(composite, 3);
 		
 		Label programLabel = new Label(composite, SWT.NONE);
-		programLabel.setText("Eiffel Program:");
+		programLabel.setText("&Eiffel Program:");
 		GridData gridData = new GridData(GridData.BEGINNING);
 		programLabel.setLayoutData(gridData);
 		programLabel.setFont(font);
 		
-		prograText = new Text(composite, SWT.SINGLE | SWT.BORDER);
+		eiffelProgramText = new Text(composite, SWT.SINGLE | SWT.BORDER);
 		gridData = new GridData(GridData.FILL_HORIZONTAL);
-		prograText.setLayoutData(gridData);
-		prograText.setFont(font);
-		prograText.addModifyListener(new ModifyListener() {
+		eiffelProgramText.setLayoutData(gridData);
+		eiffelProgramText.setFont(font);
+		eiffelProgramText.addModifyListener(new ModifyListener() {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
 				updateLaunchConfigurationDialog();
-				
 			}
 		});
 		
-		programButton = createPushButton(composite, "Browse", null);
-		programButton.addSelectionListener(new SelectionListener() {
+		eiffelProgramButton = createPushButton(composite, "&Browse...", null);
+		eiffelProgramButton.addSelectionListener(new SelectionAdapter() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				browsePDAFiles();
-				
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub				
+				browseEiffelFiles();
 			}
 		});
 		
-		Label locationLabel = new Label(composite, SWT.NONE);
-		locationLabel.setText("Open eiffel Full path");
-		GridData locationGd = new GridData(GridData.BEGINNING);
-		locationLabel.setLayoutData(locationGd);
-		locationLabel.setFont(font);
+		Label seLocationLabel = new Label(composite, SWT.NONE);
+		seLocationLabel.setText("&Open-se Full Path:");
+		GridData seLocationGd = new GridData(GridData.BEGINNING);
+		seLocationLabel.setLayoutData(seLocationGd);
+		seLocationLabel.setFont(font);
 		
-		eiffelFullPathText = new Text(composite, SWT.SINGLE | SWT.BORDER);
-		locationGd = new GridData(GridData.FILL_HORIZONTAL);
-		eiffelFullPathText.setLayoutData(locationGd);
-		eiffelFullPathText.setFont(font);
-		eiffelFullPathText.addModifyListener(new ModifyListener() {
+		seFullPathText = new Text(composite, SWT.SINGLE | SWT.BORDER);
+		seLocationGd = new GridData(GridData.FILL_HORIZONTAL);
+		seFullPathText.setLayoutData(seLocationGd);
+		seFullPathText.setFont(font);
+		seFullPathText.addModifyListener(new ModifyListener() {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
 				updateLaunchConfigurationDialog();
-				
-			}
-		});
-		
-		eiffelFileButton = createPushButton(composite, "Browse", null);
-		eiffelFileButton.addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				browsePDAFiles();
-				
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub				
 			}
 		});
 	}
 	
-	//Open a resource chooser to select a PDA program
-	protected void browsePDAFiles() {
-		ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(getShell(), ResourcesPlugin.getWorkspace()
-				.getRoot(), IResource.FILE);
-		dialog.setTitle("Eiffel Program");
-		dialog.setMessage("Select Eiffel Program");
-		if (dialog.open()== Window.OK) {
-			Object[] files = dialog.getResult();
-			IFile file = (IFile) files[0];
-			prograText.setText(file.getFullPath().toOSString());
-		}
-	}
-
 	@Override
 	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		
+		//TODO:
 	}
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
 			String program = null;
-			program = configuration.getAttribute("Eiffel Program", (String)null);
-			if (program != null) {
-				prograText.setText(program);
-			}
+			program = configuration.getAttribute(Constants.ATTR_LE_PROGRAM, (String) null);
+			if (program != null)
+				eiffelProgramText.setText(program);
 			
-			String eiffelFullPath = null;
-			eiffelFullPath = configuration.getAttribute("fullpath", (String)null);
-			if (eiffelFullPath != null) {
-				this.eiffelFullPathText.setText(eiffelFullPath);
-			}
+			String seFullPath = null;
+			seFullPath = configuration.getAttribute(Constants.ATTR_LEC_FULL_PATH, (String) null);
+			if (seFullPath != null)
+				this.seFullPathText.setText(seFullPath);
+			
 		} catch (CoreException e) {
 			setErrorMessage(e.getMessage());
 		}
@@ -152,21 +116,22 @@ public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		String program = prograText.getText().trim();
-		if(program.length() == 0) {
+		String program = eiffelProgramText.getText().trim();
+		if (program.length() == 0)
 			program = null;
-		}
-		configuration.setAttribute("Eiffel Program", program);
 		
-		String eiffelFullPath = this.eiffelFullPathText.getText().trim();
-		configuration.setAttribute("full path", eiffelFullPath);
+		configuration.setAttribute(Constants.ATTR_LE_PROGRAM, program);
 		
+		String seFullPath = this.seFullPathText.getText().trim();
+		configuration.setAttribute(Constants.ATTR_LEC_FULL_PATH, seFullPath);
+		
+		//perform resource mapping for contextual launch
 		IResource[] resources = null;
 		if (program != null) {
 			IPath path = new Path(program);
-			IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
-			if (resource != null) {
-				resources = new IResource[]{resource};
+			IResource res = ResourcesPlugin.getWorkspace().getRoot().findMember(path);
+			if (res != null) {
+				resources = new IResource[]{res};
 			}
 		}
 		configuration.setMappedResources(resources);
@@ -174,7 +139,18 @@ public class LibertyEiffelMainTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public String getName() {
-		return "File";
+		return "Main";
 	}
 
+	protected void browseEiffelFiles() {
+		ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(
+				getShell(), ResourcesPlugin.getWorkspace().getRoot(), IResource.FILE);
+		dialog.setTitle("Eiffel Program");
+		dialog.setMessage("Select Eiffel Program");
+		if (dialog.open() == Window.OK) {
+			Object[] files = dialog.getResult();
+			IFile file = (IFile) files[0];
+			eiffelProgramText.setText(file.getFullPath().toString());
+		}
+	}
 }

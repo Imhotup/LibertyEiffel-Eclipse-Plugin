@@ -11,3 +11,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.debug.core
 Bundle-Vendor: liberty-eiffel.org
+Export-Package: org.libertyeiffel.eclipse.launching,
+ org.libertyeiffel.eclipse.launching.launcher,
+ org.libertyeiffel.eclipse.launching.launcher.util

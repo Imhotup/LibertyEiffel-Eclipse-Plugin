@@ -9,8 +9,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
- org.eclipse.ui.workbench
+ org.eclipse.ui.workbench,
+ org.libertyeiffel.eclipse.launching
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8,
  JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.ui.dialogs
+Import-Package: org.eclipse.ui.dialogs,
+ org.libertyeiffel.eclipse.launching

@@ -21,11 +21,12 @@
          point="org.eclipse.debug.ui.launchShortcuts">
       <shortcut
             class="org.libertyeiffel.eclipse.launching.ui.launch.EiffelLaunchShortcut"
+            description="Call Liberty Eiffel compiler on file"
             id="org.libertyeiffel.eclipse.launching.ui.eiffelCompilerShortcut"
             label="Liberty Eiffel Compiler"
-            modes="run, debug">
+            modes="run">
          <configurationType
-               id="org.libertyeiffel.eclipse.launching.libertyEiffelCompiler">
+               id="org.libertyeiffel.eclipse.launch.EiffelConfigurationType">
          </configurationType>
          <contextualLaunch>
             <enablement>

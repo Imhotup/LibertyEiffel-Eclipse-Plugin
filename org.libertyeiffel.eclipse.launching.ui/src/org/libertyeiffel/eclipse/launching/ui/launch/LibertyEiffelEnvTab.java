@@ -1,6 +1,5 @@
 package org.libertyeiffel.eclipse.launching.ui.launch;
 
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
 import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
@@ -39,20 +38,11 @@ public class LibertyEiffelEnvTab extends AbstractLaunchConfigurationTab {
 
 	@Override
 	public void initializeFrom(ILaunchConfiguration configuration) {
-		try {
-			String consoleText = configuration.getAttribute(LibertyEiffelLaunchConfigAttributes.CONSOLE_TEXT,
-					"Environment");
-			nameText.setText(consoleText);
-			
-		} catch (CoreException e) {
-			// TODO: handle exception
-		}	
+		
 	}
 
 	@Override
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
-		configuration.setAttribute(LibertyEiffelLaunchConfigAttributes.CONSOLE_TEXT,
-				nameText.getText());
 	}
 
 	@Override
